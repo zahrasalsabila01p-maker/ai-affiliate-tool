@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Affiliate Video Prompt Tool</title>
+  <title>AI Affiliate Prompt Tool</title>
   <style>
     body { font-family: Arial, sans-serif; background:#0f172a; color:#e5e7eb; margin:0; padding:20px; }
     h1 { color:#38bdf8; }
@@ -11,28 +11,79 @@
     label { display:block; margin-top:10px; font-weight:bold; }
     textarea, input { width:100%; padding:10px; border-radius:8px; border:none; margin-top:6px; }
     button { margin-top:16px; padding:12px; width:100%; border-radius:10px; border:none; background:#38bdf8; color:#020617; font-weight:bold; }
+    .output { background:#020617; padding:12px; border-radius:10px; white-space:pre-wrap; margin-top:10px; }
+    .copy { margin-top:8px; background:#22c55e; }
   </style>
 </head>
 <body>
-  <h1>AI Affiliate Video Prompt Tool 🇮🇩</h1>
-  <p>Buat prompt video & image affiliate secara terstruktur (versi awal).</p>
 
-  <div class="card">
-    <label>1️⃣ Referensi Produk</label>
-    <textarea placeholder="Contoh: Skincare acne, botol kecil, brand lokal"></textarea>
+<h1>AI Affiliate Prompt Tool 🇮🇩</h1>
+<p>Buat prompt Video & Image affiliate otomatis (tanpa API).</p>
 
-    <label>2️⃣ Referensi Model</label>
-    <textarea placeholder="Contoh: Wanita Indonesia 20-an, natural, percaya diri"></textarea>
+<div class="card">
+  <label>1️⃣ Referensi Produk</label>
+  <textarea id="produk" placeholder="Contoh: Skincare acne, botol kecil, brand lokal"></textarea>
 
-    <label>3️⃣ Referensi Gerakan</label>
-    <textarea placeholder="Contoh: Unboxing, close-up wajah, before-after"></textarea>
+  <label>2️⃣ Referensi Model</label>
+  <textarea id="model" placeholder="Contoh: Wanita Indonesia 20-an, natural, percaya diri"></textarea>
 
-    <label>4️⃣ Gaya Video</label>
-    <input placeholder="Contoh: cinematic, fast cut, TikTok style" />
+  <label>3️⃣ Referensi Gerakan</label>
+  <textarea id="gerakan" placeholder="Contoh: Unboxing, close-up wajah, before-after"></textarea>
 
-    <button>Generate Prompt (Manual)</button>
-  </div>
+  <label>4️⃣ Gaya Video</label>
+  <input id="gaya" placeholder="Contoh: cinematic, fast cut, TikTok style" />
 
-  <p style="font-size:12px;opacity:.7">© 2026 - Build with GitHub + Vercel</p>
+  <button onclick="generate()">🚀 Generate Prompt</button>
+</div>
+
+<div class="card">
+  <h3>📽️ Prompt Video Affiliate</h3>
+  <div id="videoPrompt" class="output"></div>
+  <button class="copy" onclick="copyText('videoPrompt')">Copy Video Prompt</button>
+</div>
+
+<div class="card">
+  <h3>🖼️ Prompt Image Affiliate</h3>
+  <div id="imagePrompt" class="output"></div>
+  <button class="copy" onclick="copyText('imagePrompt')">Copy Image Prompt</button>
+</div>
+
+<script>
+function generate() {
+  const produk = document.getElementById('produk').value;
+  const model = document.getElementById('model').value;
+  const gerakan = document.getElementById('gerakan').value;
+  const gaya = document.getElementById('gaya').value;
+
+  document.getElementById('videoPrompt').innerText =
+`Buat video affiliate dengan detail berikut:
+Produk: ${produk}
+Model: ${model}
+Gerakan/Aksi: ${gerakan}
+Gaya video: ${gaya}
+
+Durasi 15–30 detik, hook kuat 3 detik pertama,
+fokus soft selling, ekspresi natural,
+CTA halus di akhir. Cocok untuk TikTok/Reels/Shorts.`;
+
+  document.getElementById('imagePrompt').innerText =
+`Foto produk affiliate dengan detail:
+Produk: ${produk}
+Model: ${model}
+Pose/Aksi: ${gerakan}
+
+Style foto: ${gaya}, pencahayaan profesional,
+realistic, high detail, clean background,
+siap untuk iklan & thumbnail.`;
+}
+
+function copyText(id) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text);
+  alert("Prompt berhasil di-copy!");
+}
+</script>
+
+<p style="font-size:12px;opacity:.7">© 2026 - Built with GitHub + Vercel</p>
 </body>
-      </html>
+</html>
