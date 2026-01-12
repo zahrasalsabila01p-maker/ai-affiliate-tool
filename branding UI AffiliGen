@@ -1,54 +1,46 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Affiliate Prompt Tool</title>
+  <title>AffiliGen 🇮🇩 – AI Affiliate Prompt Tool</title>
   <style>
     body { font-family: Arial, sans-serif; background:#0f172a; color:#e5e7eb; margin:0; padding:20px; }
-    h1 { color:#38bdf8; }
-    .card { background:#020617; border-radius:12px; padding:16px; margin-bottom:16px; box-shadow:0 10px 25px rgba(0,0,0,.3); }
+    h1 { color:#38bdf8; font-size:28px; }
+    h2 { color:#7dd3fc; margin-top:0; }
+    .hero { text-align:center; margin-bottom:30px; }
+    .hero p { opacity:.9; }
+    .card { background:#020617; border-radius:14px; padding:16px; margin-bottom:16px; box-shadow:0 10px 25px rgba(0,0,0,.3); }
     label { display:block; margin-top:10px; font-weight:bold; }
     textarea, input { width:100%; padding:10px; border-radius:8px; border:none; margin-top:6px; }
-    button { margin-top:16px; padding:12px; width:100%; border-radius:10px; border:none; background:#38bdf8; color:#020617; font-weight:bold; }
+    button { margin-top:16px; padding:14px; width:100%; border-radius:12px; border:none; background:#38bdf8; color:#020617; font-weight:bold; font-size:16px; }
     .output { background:#020617; padding:12px; border-radius:10px; white-space:pre-wrap; margin-top:10px; }
     .copy { margin-top:8px; background:#22c55e; }
+    footer { text-align:center; font-size:12px; opacity:.7; margin-top:30px; }
   </style>
 </head>
-<body>
+<body><div class="hero">
+  <h1>AffiliGen 🇮🇩</h1>
+  <p>Generator Prompt AI untuk Video & Image Affiliate Indonesia.<br>Bantu jualan lebih cepat, rapi, dan konsisten.</p>
+</div><div class="card">
+  <h2>🔧 Generate Prompt</h2><label>1️⃣ Referensi Produk</label>
 
-<h1>AI Affiliate Prompt Tool 🇮🇩</h1>
-<p>Buat prompt Video & Image affiliate otomatis (tanpa API).</p>
+  <textarea id="produk" placeholder="Contoh: Skincare acne, botol kecil, brand lokal"></textarea><label>2️⃣ Referensi Model</label>
 
-<div class="card">
-  <label>1️⃣ Referensi Produk</label>
-  <textarea id="produk" placeholder="Contoh: Skincare acne, botol kecil, brand lokal"></textarea>
+  <textarea id="model" placeholder="Contoh: Wanita Indonesia 20-an, natural, percaya diri"></textarea><label>3️⃣ Referensi Gerakan</label>
 
-  <label>2️⃣ Referensi Model</label>
-  <textarea id="model" placeholder="Contoh: Wanita Indonesia 20-an, natural, percaya diri"></textarea>
+  <textarea id="gerakan" placeholder="Contoh: Unboxing, close-up wajah, before-after"></textarea><label>4️⃣ Gaya Video</label> <input id="gaya" placeholder="Contoh: cinematic, fast cut, TikTok style" />
 
-  <label>3️⃣ Referensi Gerakan</label>
-  <textarea id="gerakan" placeholder="Contoh: Unboxing, close-up wajah, before-after"></textarea>
+<button onclick="generate()">🚀 Generate Prompt AI</button>
 
-  <label>4️⃣ Gaya Video</label>
-  <input id="gaya" placeholder="Contoh: cinematic, fast cut, TikTok style" />
-
-  <button onclick="generate()">🚀 Generate Prompt</button>
-</div>
-
-<div class="card">
+</div><div class="card">
   <h3>📽️ Prompt Video Affiliate</h3>
   <div id="videoPrompt" class="output"></div>
   <button class="copy" onclick="copyText('videoPrompt')">Copy Video Prompt</button>
-</div>
-
-<div class="card">
+</div><div class="card">
   <h3>🖼️ Prompt Image Affiliate</h3>
   <div id="imagePrompt" class="output"></div>
   <button class="copy" onclick="copyText('imagePrompt')">Copy Image Prompt</button>
-</div>
-
-<script>
+</div><script>
 function generate() {
   const produk = document.getElementById('produk').value;
   const model = document.getElementById('model').value;
@@ -63,7 +55,7 @@ Gerakan/Aksi: ${gerakan}
 Gaya video: ${gaya}
 
 Durasi 15–30 detik, hook kuat 3 detik pertama,
-fokus soft selling, ekspresi natural,
+soft selling, ekspresi natural,
 CTA halus di akhir. Cocok untuk TikTok/Reels/Shorts.`;
 
   document.getElementById('imagePrompt').innerText =
@@ -72,7 +64,7 @@ Produk: ${produk}
 Model: ${model}
 Pose/Aksi: ${gerakan}
 
-Style foto: ${gaya}, pencahayaan profesional,
+Style: ${gaya}, pencahayaan profesional,
 realistic, high detail, clean background,
 siap untuk iklan & thumbnail.`;
 }
@@ -80,10 +72,9 @@ siap untuk iklan & thumbnail.`;
 function copyText(id) {
   const text = document.getElementById(id).innerText;
   navigator.clipboard.writeText(text);
-  alert("Prompt berhasil di-copy!");
+  alert('Prompt berhasil di-copy!');
 }
-</script>
-
-<p style="font-size:12px;opacity:.7">© 2026 - Built with GitHub + Vercel</p>
-</body>
+</script><footer>
+  © 2026 AffiliGen 🇮🇩 • Build with GitHub & Vercel
+</footer></body>
 </html>
