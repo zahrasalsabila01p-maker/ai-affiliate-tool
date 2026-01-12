@@ -57,7 +57,7 @@
 
 <label>6️⃣ Target AI</label> <select id="ai"><option>Grok AI</option><option>Midjourney</option><option>Stable Diffusion</option><option>Runway ML</option><option>Pika Labs</option></select>
 
-<label>7️⃣ Fokus Prompt Video</label> <select id="fokus"> <option>Hook (Bikin Berhenti Scroll)</option> <option>Masalah (Pain Point)</option> <option>Aksi / Solusi</option> <option>Jualan / CTA</option> </select>
+<label>7️⃣ Fokus Konten (Image + Video)</label> <select id="fokus"> <option value="hook">Hook (Bikin Berhenti Scroll)</option> <option value="problem">Masalah / Pain Point</option> <option value="solution">Aksi / Solusi</option> <option value="cta">Jualan / CTA</option> </select>
 
 <button onclick="generate()">🔥 Generate Affiliate Prompt</button>
 
@@ -75,34 +75,57 @@ function generate() {
   const platform = document.getElementById('platform').value;
   const fokus = document.getElementById('fokus').value;
 
+  const focusMap = {
+    hook: {
+      title: 'HOOK – Stop Scrolling',
+      image: 'Strong attention-grabbing visual, shocking composition, high contrast, bold framing',
+      video: 'Instant hook, fast camera move, dramatic opening frame'
+    },
+    problem: {
+      title: 'PROBLEM – Pain Point',
+      image: 'Relatable daily problem visual, emotional expression, imperfect realistic scene',
+      video: 'Show frustration, problem clearly visible and relatable'
+    },
+    solution: {
+      title: 'SOLUTION – Action & Result',
+      image: 'Clear product usage, transformation moment, clean and convincing visual',
+      video: 'Demonstrate product action and visible improvement'
+    },
+    cta: {
+      title: 'CTA – Selling Moment',
+      image: 'Confident pose, product highlight, clean background, trust-building visual',
+      video: 'Strong closing, confident selling pose, clear call to action'
+    }
+  };
+
+  const f = focusMap[fokus];
+
   document.getElementById('imagePrompt').innerText =
-`High quality affiliate product image.
+`${f.title} | IMAGE PROMPT
+
+Affiliate product image for ${platform}.
 Product: ${produk}
 Model: ${model}
+Visual intent: ${f.image}
 Style: ${gaya}
-Lighting: clean, commercial, realistic
-Background: minimal
-Purpose: stable reference image for ${platform}
+Lighting: commercial, realistic
+Purpose: reference image for video
 Optimized for ${ai}`;
 
   document.getElementById('videoPrompt').innerText =
-`AFFILIATE VIDEO PROMPT (${fokus}) 🔥
+`${f.title} | IMAGE → VIDEO PROMPT 🔥
 
 Platform: ${platform}
-AI: ${ai}
-Reference image: use as main visual
+AI Engine: ${ai}
+Reference image: use generated image above
 
-Scene intent:
-${fokus === 'Hook (Bikin Berhenti Scroll)' ? '- Open with strong visual shock, instant attention grab.' : ''}
-${fokus === 'Masalah (Pain Point)' ? '- Highlight user problem clearly and emotionally relatable.' : ''}
-${fokus === 'Aksi / Solusi' ? '- Show clear transformation or product usage.' : ''}
-${fokus === 'Jualan / CTA' ? '- End with confident selling pose and clear call to action.' : ''}
-
+Video intent: ${f.video}
 Motion: ${gerakan}
-Camera: dynamic, smooth, vertical 9:16
+Camera: dynamic, vertical 9:16
 Style: ${gaya}
 Duration: 5–7 seconds
 Goal: high CTR affiliate content`;
+}
 }
 
 function copyText(id) {
