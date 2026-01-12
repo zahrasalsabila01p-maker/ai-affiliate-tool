@@ -1,31 +1,174 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>AffiliGen AI</title>
+
   <style>
-    body {
-      background:#0f172a;
+    body{
+      margin:0;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(135deg,#020617,#0f172a);
       color:#e5e7eb;
-      font-family: Arial, sans-serif;
-      padding:40px;
     }
-    .box {
-      max-width:600px;
+    .container{
+      max-width:720px;
       margin:auto;
-      background:#020617;
-      padding:30px;
-      border-radius:16px;
+      padding:24px;
+    }
+    .hero{
       text-align:center;
+      margin-bottom:32px;
+    }
+    .hero h1{
+      font-size:32px;
+      color:#38bdf8;
+    }
+    .hero p{
+      opacity:.85;
+    }
+    .card{
+      background:rgba(2,6,23,.95);
+      border:1px solid rgba(56,189,248,.15);
+      border-radius:16px;
+      padding:20px;
+      margin-bottom:20px;
+    }
+    label{
+      display:block;
+      margin-top:14px;
+      font-weight:bold;
+    }
+    textarea,input,select{
+      width:100%;
+      margin-top:6px;
+      padding:10px;
+      border-radius:10px;
+      border:none;
+      background:#020617;
+      color:#e5e7eb;
+    }
+    button{
+      width:100%;
+      margin-top:20px;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      background:#38bdf8;
+      color:#020617;
+      font-weight:bold;
+      cursor:pointer;
+    }
+    .output{
+      white-space:pre-wrap;
+      font-size:13px;
+      background:#020617;
+      padding:14px;
+      border-radius:12px;
+      margin-top:10px;
+    }
+    footer{
+      text-align:center;
+      opacity:.6;
+      font-size:12px;
+      margin-top:40px;
     }
   </style>
 </head>
+
 <body>
-  <div class="box">
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero">
     <h1>AffiliGen AI 🇮🇩</h1>
-    <p>Web aktif & siap dikembangkan.</p>
-    <p>Next: struktur final + Viral Mode 🔥</p>
+    <p>Affiliate Funnel Prompt Engine (Image + Video)</p>
+  </section>
+
+  <!-- FORM INPUT -->
+  <div class="card">
+    <label>1️⃣ Referensi Produk</label>
+    <textarea id="produk"></textarea>
+
+    <label>2️⃣ Referensi Model</label>
+    <textarea id="model"></textarea>
+
+    <label>3️⃣ Referensi Gerakan</label>
+    <textarea id="gerakan"></textarea>
+
+    <label>4️⃣ Gaya Visual</label>
+    <input id="gaya" placeholder="cinematic / clean / dramatic">
+
+    <label>5️⃣ Platform</label>
+    <select id="platform">
+      <option>TikTok Shop</option>
+      <option>Shopee Affiliate</option>
+    </select>
+
+    <label>6️⃣ AI Engine</label>
+    <select id="ai">
+      <option>Grok</option>
+      <option>Midjourney</option>
+      <option>Stable Diffusion</option>
+      <option>Runway</option>
+      <option>Pika</option>
+    </select>
+
+    <label>7️⃣ Fokus Funnel</label>
+    <select id="fokus">
+      <option value="hook">Hook</option>
+      <option value="problem">Problem</option>
+      <option value="solution">Solution</option>
+      <option value="cta">CTA</option>
+    </select>
+
+    <button onclick="generate()">Generate Prompt</button>
   </div>
+
+  <!-- OUTPUT -->
+  <div class="card">
+    <h3>🖼️ Image Prompt</h3>
+    <div id="imageOut" class="output">—</div>
+
+    <h3 style="margin-top:20px;">🎬 Image → Video Prompt</h3>
+    <div id="videoOut" class="output">—</div>
+  </div>
+
+  <footer>
+    © 2026 AffiliGen AI
+  </footer>
+
+</div>
+
+<script>
+function generate(){
+  const produk = produk.value;
+  const model = model.value;
+  const gerakan = gerakan.value;
+  const gaya = gaya.value;
+  const platform = platform.value;
+  const ai = ai.value;
+  const fokus = fokus.value;
+
+  imageOut.innerText =
+`IMAGE PROMPT (${fokus.toUpperCase()})
+Product: ${produk}
+Model: ${model}
+Style: ${gaya}
+Platform: ${platform}
+AI: ${ai}`;
+
+  videoOut.innerText =
+`IMAGE → VIDEO PROMPT (${fokus.toUpperCase()})
+Use image above as reference
+Motion: ${gerakan}
+Style: ${gaya}
+Format: 9:16 vertical
+Duration: 5–7 seconds
+Goal: high CTR affiliate`;
+}
+</script>
+
 </body>
 </html>
