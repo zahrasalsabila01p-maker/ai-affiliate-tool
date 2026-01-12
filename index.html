@@ -18,9 +18,23 @@
     .badge { display:inline-block; background:#0f172a; border:1px solid #1e293b; padding:6px 12px; border-radius:999px; font-size:12px; margin-right:6px; }
   </style>
 </head>
-<body><h1>AffiliGen 🇮🇩</h1>
-<p class="subtitle">AI Affiliate Prompt Generator – Image → Image to Video</p>
-<span class="badge">Shopee</span><span class="badge">TikTok Shop</span><span class="badge">Affiliate Viral Mode</span><div class="card">
+<body><!-- HERO / LANDING SECTION --><section style="max-width:960px;margin:0 auto 48px auto;text-align:center;">
+  <h1 style="font-size:40px;margin-bottom:12px;">AffiliGen 🇮🇩</h1>
+  <p style="font-size:18px;opacity:.85;max-width:720px;margin:0 auto 20px;">
+    Generate <b>prompt gambar & video affiliate</b> yang siap pakai untuk <b>Shopee & TikTok Shop</b>.
+    Dirancang untuk creator Indonesia — cepat, rapi, dan fokus konversi.
+  </p>
+  <div style="margin-bottom:24px;">
+    <span class="badge">Image Prompt</span>
+    <span class="badge">Image → Video</span>
+    <span class="badge">Affiliate Viral Mode 🔥</span>
+  </div>
+  <button onclick="document.getElementById('generator').scrollIntoView({behavior:'smooth'})" style="max-width:320px;">🚀 Coba Gratis Sekarang</button>
+</section><!-- HOW IT WORKS --><section style="max-width:960px;margin:0 auto 56px auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;">
+  <div class="card"><h3>1️⃣ Isi Referensi</h3><p style="opacity:.8">Masukkan produk, model, gaya, dan gerakan video affiliate.</p></div>
+  <div class="card"><h3>2️⃣ Generate Prompt</h3><p style="opacity:.8">Tool akan menyusun prompt gambar & video secara terstruktur.</p></div>
+  <div class="card"><h3>3️⃣ Copy & Pakai</h3><p style="opacity:.8">Tinggal copy ke Grok, Midjourney, Runway, Pika, dll.</p></div>
+</section><!-- GENERATOR --><div id="generator" class="card">
   <label>1️⃣ Referensi Produk</label>
   <textarea id="produk" placeholder="Contoh: Skincare acne, botol kecil, brand lokal"></textarea>
   <label>Upload Gambar Produk (maks. 5)</label>
