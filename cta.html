@@ -6,66 +6,14 @@
   <title>CTA Tool — AffiliGen AI</title>
 
   <style>
-    *{box-sizing:border-box}
-    /* === CYBERPUNK PROGRESS INDICATOR === */
-.progress-wrap{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin:30px auto 40px;
-  max-width:700px;
-}
-
-.progress-step{
-  width:64px;
-  height:64px;
-  border-radius:16px;
-  background:#020617;
-  border:1px solid rgba(56,189,248,.35);
-  color:#64748b;
-  font-size:16px;
-  font-weight:900;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  transition:.3s;
-}
-
-.progress-step span{
-  font-size:11px;
-  font-weight:500;
-  margin-top:3px;
-}
-
-.progress-line{
-  width:36px;
-  height:3px;
-  background:rgba(56,189,248,.25);
-}
-
-/* ACTIVE */
-.progress-step.active{
-  background:linear-gradient(135deg,#38bdf8,#22d3ee);
-  color:#020617;
-  box-shadow:0 0 25px rgba(56,189,248,.8);
-  border:none;
-}
-
-/* DONE */
-.progress-step.done{
-  color:#38bdf8;
-  border-color:#38bdf8;
-}
+    *{box-sizing:border-box;}
     body{
       margin:0;
       font-family:Inter,Arial,sans-serif;
       background:radial-gradient(circle at top,#0f172a,#020617 65%);
       color:#e5e7eb;
     }
-
-    a{text-decoration:none}
+    a{text-decoration:none;}
 
     .container{
       max-width:900px;
@@ -80,7 +28,6 @@
       gap:14px;
       margin-bottom:30px;
     }
-
     .logo{
       width:48px;
       height:48px;
@@ -93,17 +40,8 @@
       justify-content:center;
       box-shadow:0 0 30px rgba(56,189,248,.6);
     }
-
-    h1{
-      margin:0;
-      font-size:32px;
-      color:#38bdf8;
-    }
-
-    .subtitle{
-      opacity:.85;
-      margin-top:6px;
-    }
+    h1{margin:0;font-size:32px;color:#38bdf8;}
+    .subtitle{opacity:.85;margin-top:6px;}
 
     /* CARD */
     .card{
@@ -114,13 +52,7 @@
       margin-top:36px;
       box-shadow:0 18px 45px rgba(0,0,0,.45);
     }
-
-    .card h2{
-      margin-top:0;
-      color:#7dd3fc;
-      font-size:22px;
-    }
-
+    .card h2{margin-top:0;color:#7dd3fc;font-size:22px;}
     label{
       display:block;
       margin-top:22px;
@@ -129,32 +61,25 @@
       font-weight:600;
       opacity:.9;
     }
-
     textarea{
       width:100%;
-      min-height:90px;
+      min-height:70px;
       resize:vertical;
-      padding:14px;
+      padding:12px;
       border-radius:14px;
       border:1px solid rgba(56,189,248,.25);
       background:#020617;
       color:#e5e7eb;
       font-size:14px;
     }
-
     textarea:focus{
       outline:none;
       border-color:#38bdf8;
       box-shadow:0 0 18px rgba(56,189,248,.35);
     }
+    .hint{font-size:13px;opacity:.65;margin-top:6px;}
 
-    .hint{
-      font-size:13px;
-      opacity:.65;
-      margin-top:6px;
-    }
-
-    /* CTA */
+    /* CTA BUTTONS */
     .cta-wrap{
       display:flex;
       justify-content:space-between;
@@ -162,7 +87,6 @@
       margin-top:36px;
       flex-wrap:wrap;
     }
-
     .btn{
       flex:1;
       padding:16px 22px;
@@ -174,35 +98,64 @@
       text-align:center;
       transition:.25s ease;
     }
-
     .btn-back{
       background:#020617;
       color:#38bdf8;
       border:1px solid rgba(56,189,248,.35);
     }
-
     .btn-back:hover{
       box-shadow:0 0 24px rgba(56,189,248,.4);
     }
-
     .btn-next{
       background:linear-gradient(135deg,#38bdf8,#22d3ee);
       color:#020617;
       box-shadow:0 0 36px rgba(56,189,248,.55);
     }
-
     .btn-next:hover{
       transform:translateY(-2px);
       box-shadow:0 0 60px rgba(56,189,248,.85);
     }
 
-    /* FOOTER */
-    footer{
-      margin-top:70px;
-      text-align:center;
-      font-size:13px;
-      opacity:.6;
+    /* PROGRESS */
+    .progress-wrap{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+      margin:30px auto 40px;
+      max-width:700px;
     }
+    .progress-step{
+      width:64px;
+      height:64px;
+      border-radius:16px;
+      background:#020617;
+      border:1px solid rgba(56,189,248,.35);
+      color:#64748b;
+      font-size:16px;
+      font-weight:900;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      transition:.3s;
+    }
+    .progress-step span{font-size:11px;font-weight:500;margin-top:3px;}
+    .progress-line{width:36px;height:3px;background:rgba(56,189,248,.25);}
+    .progress-step.active{background:linear-gradient(135deg,#38bdf8,#22d3ee);color:#020617;box-shadow:0 0 25px rgba(56,189,248,.8);border:none;}
+    .progress-step.done{color:#38bdf8;border-color:#38bdf8;}
+
+    /* CTA PREVIEW */
+    .preview-card{
+      margin-top:28px;
+      padding:20px;
+      border-radius:18px;
+      background:rgba(56,189,248,.05);
+      border:1px solid rgba(56,189,248,.25);
+      color:#e5e7eb;
+    }
+    .preview-card h3{margin:0 0 10px 0;color:#22d3ee;}
+    .preview-card p{margin:6px 0;}
   </style>
 </head>
 
@@ -217,7 +170,8 @@
   <div class="progress-line"></div>
   <div class="progress-step" data-page="cta.html">4<br><span>CTA</span></div>
 </div>
-  <div class="container">
+
+<div class="container">
 
     <!-- HEADER -->
     <div class="header">
@@ -230,19 +184,27 @@
 
     <!-- MAIN CARD -->
     <div class="card">
-      <h2>🚀 Buat CTA yang Powerful</h2>
+      <h2>🚀 Buat CTA Interaktif</h2>
 
-      <label>Aksi Utama yang Ingin Dicapai</label>
-      <textarea placeholder="Contoh: Beli sekarang, Daftar gratis, Dapatkan diskon"></textarea>
+      <label>Aksi Utama</label>
+      <textarea id="ctaAction" placeholder="Contoh: Beli sekarang, Daftar gratis, Dapatkan diskon"></textarea>
       <div class="hint">Apa yang ingin audiens lakukan setelah melihat konten?</div>
 
-      <label>Alasan Audiens Harus Bertindak</label>
-      <textarea placeholder="Contoh: Stok terbatas, Bonus eksklusif, Solusi cepat untuk masalah mereka"></textarea>
+      <label>Alasan Bertindak</label>
+      <textarea id="ctaReason" placeholder="Contoh: Stok terbatas, Bonus eksklusif, Solusi cepat"></textarea>
       <div class="hint">Berikan urgensi atau manfaat yang jelas.</div>
 
       <label>Pesan Pendukung / Testimoni</label>
-      <textarea placeholder="Contoh: ‘Sudah dicoba ribuan orang’, ‘100% terbukti efektif’"></textarea>
+      <textarea id="ctaSupport" placeholder="Contoh: ‘Sudah dicoba ribuan orang’, ‘100% terbukti efektif’"></textarea>
       <div class="hint">Bantu audiens percaya dan yakin untuk klik.</div>
+
+      <!-- PREVIEW CTA -->
+      <div class="preview-card" id="ctaPreview">
+        <h3>Preview CTA</h3>
+        <p><strong>Aksi Utama:</strong> -</p>
+        <p><strong>Alasan Bertindak:</strong> -</p>
+        <p><strong>Pesan Pendukung:</strong> -</p>
+      </div>
 
       <!-- CTA BUTTONS -->
       <div class="cta-wrap">
@@ -257,28 +219,40 @@
       <div>Hook → Problem → Solution → CTA</div>
     </footer>
 
-  </div>
+</div>
 
-  <script>
+<script>
+  // PROGRESS STEP
   const steps = document.querySelectorAll('.progress-step');
   const currentPage = location.pathname.split('/').pop();
-
   let activeIndex = 0;
-
   steps.forEach((step, index) => {
-    if(step.dataset.page === currentPage){
-      activeIndex = index;
-    }
+    if(step.dataset.page === currentPage){ activeIndex = index; }
+  });
+  steps.forEach((step, index) => {
+    if(index < activeIndex){ step.classList.add('done'); }
+    if(index === activeIndex){ step.classList.add('active'); }
   });
 
-  steps.forEach((step, index) => {
-    if(index < activeIndex){
-      step.classList.add('done');
-    }
-    if(index === activeIndex){
-      step.classList.add('active');
-    }
-  });
-  </script>
+  // CTA PREVIEW
+  const ctaAction = document.getElementById('ctaAction');
+  const ctaReason = document.getElementById('ctaReason');
+  const ctaSupport = document.getElementById('ctaSupport');
+  const ctaPreview = document.getElementById('ctaPreview');
+
+  function updatePreview(){
+    ctaPreview.innerHTML = `
+      <h3>Preview CTA</h3>
+      <p><strong>Aksi Utama:</strong> ${ctaAction.value || '-'}</p>
+      <p><strong>Alasan Bertindak:</strong> ${ctaReason.value || '-'}</p>
+      <p><strong>Pesan Pendukung:</strong> ${ctaSupport.value || '-'}</p>
+    `;
+  }
+
+  ctaAction.addEventListener('input', updatePreview);
+  ctaReason.addEventListener('input', updatePreview);
+  ctaSupport.addEventListener('input', updatePreview);
+</script>
+
 </body>
-        </html>
+</html>
