@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solution Tool – AffiliGen AI</title>  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
+    .container{max-width:860px;margin:auto;padding:24px}
+    .hero{text-align:center;margin-bottom:36px}
+    .hero h1{font-size:36px;color:#38bdf8;margin-bottom:6px}
+    .hero p{opacity:.85;font-size:15px}
+    .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
+    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
+    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
+    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
+    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
+    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
+    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
+    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
+  </style></head>
+<body>
+<div class="container"><section class="hero">
+  <h1>✨ Solution Tool</h1>
+  <p>Menampilkan <b>solusi & transformasi</b> secara natural.<br>
+  Bukan jualan — tapi bukti.</p>
+</section><div class="card">
+  <label>1️⃣ Produk / Solusi</label>
+  <textarea id="produk" placeholder="Contoh: Serum acne, alat dapur praktis"></textarea><label>2️⃣ Masalah yang Diselesaikan</label>
+
+  <textarea id="masalah" placeholder="Jerawat membandel, masak lama"></textarea><label>3️⃣ Hasil yang Terlihat</label>
+
+  <textarea id="hasil" placeholder="Kulit lebih bersih, masak lebih cepat"></textarea><label>4️⃣ Gaya Solusi</label> <select id="gaya"> <option value="demo">Demo Langsung</option> <option value="before_after">Before – After</option> <option value="routine">Daily Routine</option> <option value="reaction">Reaksi Jujur</option> </select>
+
+<label>5️⃣ Mood Visual</label> <select id="mood"> <option value="natural">Natural</option> <option value="satisfying">Satisfying</option> <option value="clean">Clean</option> <option value="energetic">Energetic</option> </select>
+
+<button onclick="generateSolution()">🚀 Generate Solution</button>
+
+</div><div class="card">
+  <h3>🖼️ Image Prompt (Solution Frame)</h3>
+  <div id="imageOut" class="output">—</div>
+  <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt (Solution Scene)</h3>
+  <div id="videoOut" class="output">—</div>
+  <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>  <h3 style="margin-top:26px">🧠 Transformation Angle</h3>
+  <div id="angleOut" class="output">—</div>
+</div><footer>
+  <div><b>AffiliGen AI – Solution Tool</b></div>
+  <div>Build for TikTok & Shopee Affiliate</div>
+  <div style="margin-top:6px">© 2026</div>
+</footer></div><script>
+function copyText(id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+  alert('Disalin ✅');
+}
+
+function generateSolution(){
+  const produk = produk.value;
+  const masalah = masalah.value;
+  const hasil = hasil.value;
+  const gaya = gaya.value;
+  const mood = mood.value;
+
+  const gayaMap={
+    demo:'Perlihatkan cara pakai secara jelas dan simpel',
+    before_after:'Kontras sebelum vs sesudah',
+    routine:'Bagian dari rutinitas harian',
+    reaction:'Reaksi pertama setelah pakai'
+  };
+
+  imageOut.innerText = `SOLUTION IMAGE PROMPT\n\nProduct/Solution: ${produk}\nProblem Solved: ${masalah}\nVisible Result: ${hasil}\nSolution Style: ${gayaMap[gaya]}\nMood: ${mood}\nLighting: Bright, clear, honest\nComposition: Fokus ke hasil nyata\nGoal: Show proof, not promise`;
+
+  videoOut.innerText = `SOLUTION VIDEO PROMPT (Image → Video)\n\nUse solution image as base\nMotion: Smooth, confident, natural\nDuration: 4–6 seconds\nVisual Focus: Transformation / demo\nMood: ${mood}\nFormat: Vertical 9:16\nGoal: Build trust & desire naturally`;
+
+  angleOut.innerText = `TRANSFORMATION ANGLE\n\nTunjukkan bagaimana "${produk}" menyelesaikan masalah "${masalah}".\nFokus ke hasil: ${hasil}.\nJangan hard sell — biarkan visual berbicara.`;
+}
+</script></body>
+    </html>
