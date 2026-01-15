@@ -3,193 +3,78 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AffiliGen AI</title>  <style>
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:linear-gradient(135deg,#020617,#0f172a);
-      color:#e5e7eb;
-    }
-    .container{
-      max-width:760px;
-      margin:auto;
-      padding:24px;
-    }
-    .hero{
-      text-align:center;
-      margin-bottom:32px;
-    }
-    .hero h1{
-      font-size:34px;
-      color:#38bdf8;
-    }
-    .hero p{
-      opacity:.85;
-    }
-    .card{
-      background:rgba(2,6,23,.95);
-      border:1px solid rgba(56,189,248,.15);
-      border-radius:16px;
-      padding:20px;
-      margin-bottom:20px;
-      box-shadow:0 10px 30px rgba(0,0,0,.4);
-    }
-    label{
-      display:block;
-      margin-top:14px;
-      font-weight:bold;
-    }
-    textarea,input,select{
-      width:100%;
-      margin-top:6px;
-      padding:10px;
-      border-radius:10px;
-      border:none;
-      background:#020617;
-      color:#e5e7eb;
-    }
-    button{
-      width:100%;
-      margin-top:22px;
-      padding:14px;
-      border:none;
-      border-radius:12px;
-      background:#38bdf8;
-      color:#020617;
-      font-weight:bold;
-      cursor:pointer;
-      transition:.2s;
-    }
-    button:hover{
-      box-shadow:0 0 25px rgba(56,189,248,.6);
-    }
-    .output{
-      white-space:pre-wrap;
-      font-size:13px;
-      background:#020617;
-      padding:14px;
-      border-radius:12px;
-      margin-top:10px;
-      border:1px solid rgba(56,189,248,.15);
-    }
-    footer{
-      text-align:center;
-      opacity:.6;
-      font-size:12px;
-      margin-top:40px;
-    }
-  </style></head><body>
-<div class="container">  <!-- HERO -->  <section class="hero">
-    <h1>AffiliGen AI 🇮🇩</h1>
-    <p>Affiliate Funnel Prompt Engine<br>Image + Image-to-Video (Cyberpunk SaaS)</p>
-  </section>  <!-- FORM INPUT -->  <div class="card">
-    <label>1️⃣ Referensi Produk</label>
-    <textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea><label>2️⃣ Referensi Model</label>
-<textarea id="model" placeholder="Wanita Indonesia 20-an, natural"></textarea>
+    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
+    .container{max-width:820px;margin:auto;padding:24px}
+    .hero{text-align:center;margin-bottom:36px}
+    .hero h1{font-size:36px;color:#38bdf8}
+    .hero p{opacity:.85}
+    .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
+    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
+    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
+    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
+    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
+    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
+    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
+    .preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .preview img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3)}
+    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
+  </style></head>
+<body>
+<div class="container"><section class="hero">
+  <h1>AffiliGen AI 🇮🇩</h1>
+  <p>Affiliate Funnel Prompt Engine<br>Image + Image-to-Video Prompt</p>
+</section><div class="card">
+  <label>1️⃣ Referensi Produk</label>
+  <textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea>
+  <input type="file" id="produkImg" accept="image/*" multiple />
+  <div id="produkPreview" class="preview"></div><label>2️⃣ Referensi Model</label>
 
-<label>3️⃣ Referensi Gerakan</label>
-<textarea id="gerakan" placeholder="Unboxing, close-up, before-after"></textarea>
+  <textarea id="model" placeholder="Wanita Indonesia 20-an, natural"></textarea>  <input type="file" id="modelImg" accept="image/*" multiple />
+  <div id="modelPreview" class="preview"></div><label>3️⃣ Referensi Gerakan</label>
 
-<label>4️⃣ Gaya Visual</label>
-<input id="gaya" placeholder="cinematic / clean / dramatic" />
+  <textarea id="gerakan" placeholder="Unboxing, close-up, before-after"></textarea><label>4️⃣ Gaya Visual</label> <input id="gaya" placeholder="cinematic / clean / dramatic" />
 
-<label>5️⃣ Platform</label>
-<select id="platform">
-  <option>TikTok Shop</option>
-  <option>Shopee Affiliate</option>
-</select>
+<label>5️⃣ Platform Preset</label> <select id="platform"> <option value="tiktok">TikTok Shop</option> <option value="shopee">Shopee Affiliate</option> </select>
 
-<label>6️⃣ AI Engine</label>
-<select id="ai">
-  <option>Grok</option>
-  <option>Midjourney</option>
-  <option>Stable Diffusion</option>
-  <option>Runway</option>
-  <option>Pika</option>
-</select>
+<label>6️⃣ AI Engine</label> <select id="ai"> <option>Grok</option> <option>Midjourney</option> <option>Stable Diffusion</option> <option>Runway</option> <option>Pika</option> </select>
 
-<label>7️⃣ Fokus Funnel</label>
-<select id="fokus">
-  <option value="hook">Hook – Stop Scroll</option>
-  <option value="problem">Problem – Pain Point</option>
-  <option value="solution">Solution – Transformasi</option>
-  <option value="cta">CTA – Jualan</option>
-</select>
+<label>7️⃣ Fokus Funnel</label> <select id="fokus"> <option value="hook">Hook – Stop Scroll</option> <option value="problem">Problem – Pain Point</option> <option value="solution">Solution – Transformasi</option> <option value="cta">CTA – Jualan</option> </select>
 
-<label>🔥 Mode Prompt</label>
-<select id="mode">
-  <option value="normal">Normal Mode</option>
-  <option value="viral">🔥 Affiliate Viral Mode</option>
-</select>
+<label>🔥 Mode Prompt</label> <select id="mode"> <option value="normal">Normal Mode</option> <option value="viral">🔥 Affiliate Viral Mode</option> </select>
 
-<button onclick="generate()">Generate Prompt</button>
+<button onclick="generate()">🚀 Generate Prompt</button>
 
-  </div>  <!-- OUTPUT -->  <div class="card">
-    <h3>🖼️ Image Prompt</h3>
-    <div id="imageOut" class="output">—</div><h3 style="margin-top:22px;">🎬 Image → Video Prompt</h3>
-<div id="videoOut" class="output">—</div>
+</div><div class="card">
+  <h3>🖼️ Image Prompt</h3>
+  <div id="imageOut" class="output">—</div>
+  <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
+  <div id="videoOut" class="output">—</div>
+  <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
+</div><footer>© 2026 AffiliGen AI — Build with GitHub + Vercel</footer>
+</div><script>
+function previewImages(input, target){
+  const preview = document.getElementById(target);
+  preview.innerHTML='';
+  Array.from(input.files).slice(0,5).forEach(file=>{
+    const img=document.createElement('img');
+    img.src=URL.createObjectURL(file);
+    preview.appendChild(img);
+  });
+}
+produkImg.onchange=()=>previewImages(produkImg,'produkPreview');
+modelImg.onchange=()=>previewImages(modelImg,'modelPreview');
 
-  </div>  <footer>
-    © 2026 AffiliGen AI — Build with GitHub + Vercel
-  </footer></div><script>
+function copyText(id){navigator.clipboard.writeText(document.getElementById(id).innerText);alert('Prompt berhasil disalin ✅')}
+
 function generate(){
-  const produk = document.getElementById("produk").value;
-  const model = document.getElementById("model").value;
-  const gerakan = document.getElementById("gerakan").value;
-  const gaya = document.getElementById("gaya").value;
-  const platform = document.getElementById("platform").value;
-  const ai = document.getElementById("ai").value;
-  const fokus = document.getElementById("fokus").value;
-  const mode = document.getElementById("mode").value;
+  const focusMap={hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame'},problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle'},solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result'},cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA'}};
+  const f=focusMap[fokus.value];
+  const platformTone=platform.value==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
+  const modeTone=mode.value==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
 
-  const focusMap = {
-    hook: {
-      title: "HOOK – STOP SCROLLING",
-      visual: "High contrast, bold framing, instant curiosity"
-    },
-    problem: {
-      title: "PROBLEM – PAIN POINT",
-      visual: "Relatable frustration, raw emotion"
-    },
-    solution: {
-      title: "SOLUTION – TRANSFORMATION",
-      visual: "Clear product action, visible result"
-    },
-    cta: {
-      title: "CTA – SELLING MOMENT",
-      visual: "Confident selling, trust-building visual"
-    }
-  };
+  imageOut.innerText=`${f.t}\nIMAGE PROMPT\n\nProduct: ${produk.value}\nModel: ${model.value}\nUse attached product & model images as visual reference (keep identity & shape consistent)\nVisual Focus: ${f.v}\nStyle: ${gaya.value}\nMood: ${platformTone} | ${modeTone}\nAI Engine: ${ai.value}`;
 
-  const tone = mode === "viral"
-    ? "Scroll-stopping, emotional, urgency, Indonesian affiliate viral style"
-    : "Clean, professional, commercial style";
-
-  const f = focusMap[fokus];
-
-  document.getElementById("imageOut").innerText =
-`${f.title}
-IMAGE PROMPT
-
-Product: ${produk}
-Model: ${model}
-Visual Focus: ${f.visual}
-Style: ${gaya}
-Mood: ${tone}
-Platform: ${platform}
-AI Engine: ${ai}`;
-
-  document.getElementById("videoOut").innerText =
-`${f.title}
-IMAGE → VIDEO PROMPT
-
-Use image above as reference
-Motion: ${gerakan}
-Video Focus: ${f.visual}
-Style: ${gaya}
-Mood: ${tone}
-Format: Vertical 9:16
-Duration: 5–7 seconds
-Goal: High CTR Affiliate Video`;
+  videoOut.innerText=`${f.t}\nIMAGE → VIDEO PROMPT\n\nUse generated image + attached references\nMotion: ${gerakan.value}\nVisual Focus: ${f.v}\nStyle: ${gaya.value}\nMood: ${platformTone} | ${modeTone}\nFormat: Vertical 9:16\nDuration: 5–7s\nGoal: High CTR Affiliate Video`;
 }
 </script></body>
-</html>
+                                                                              </html>
