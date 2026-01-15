@@ -14,7 +14,7 @@
       color:#e5e7eb;
     }
 
-    a{text-decoration:none}
+    a{text-decoration:none;color:inherit}
 
     .container{
       max-width:1100px;
@@ -52,7 +52,6 @@
       font-size:44px;
       margin:0;
       color:#38bdf8;
-      letter-spacing:.5px;
     }
 
     .hero p{
@@ -77,7 +76,6 @@
       font-size:13px;
       background:rgba(56,189,248,.12);
       border:1px solid rgba(56,189,248,.35);
-      color:#e5e7eb;
     }
 
     /* CTA */
@@ -117,34 +115,7 @@
       text-align:center;
     }
 
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:22px;
-      margin-top:34px;
-    }
-
-    .card{
-      background:rgba(2,6,23,.92);
-      border:1px solid rgba(56,189,248,.18);
-      border-radius:20px;
-      padding:26px;
-      box-shadow:0 18px 45px rgba(0,0,0,.45);
-    }
-
-    .card h3{
-      margin-top:0;
-      color:#7dd3fc;
-      font-size:18px;
-    }
-
-    .card p{
-      font-size:15px;
-      line-height:1.6;
-      opacity:.9;
-    }
-
-    /* FLOW */
+    /* FLOW (CLICKABLE STEPS) */
     .flow{
       display:grid;
       grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -157,6 +128,8 @@
       border:1px solid rgba(56,189,248,.2);
       border-radius:18px;
       padding:22px;
+      transition:.25s ease;
+      cursor:pointer;
     }
 
     .step span{
@@ -167,6 +140,12 @@
     .step h4{
       margin:8px 0 10px;
       color:#38bdf8;
+    }
+
+    .step:hover{
+      transform:translateY(-4px);
+      box-shadow:0 0 50px rgba(56,189,248,.35);
+      border-color:rgba(56,189,248,.45);
     }
 
     /* FOOTER */
@@ -191,19 +170,17 @@
 
       <p>
         <strong>Bukan sekadar AI Prompt Generator.</strong><br>
-        Ini <b>Affiliate Content Engine</b> — mesin berpikir untuk creator
-        yang ingin kontennya terlihat <b>natural, profesional</b>,
-        dan <b>konversi tinggi</b>.
+        Ini <b>Affiliate Content Engine</b> untuk creator
+        yang ingin kontennya terlihat <b>natural</b>,
+        <b>profesional</b>, dan <b>konversi tinggi</b>.
       </p>
 
       <div class="badge-row">
-        <div class="badge">⚡ Funnel-based Prompt</div>
-        <div class="badge">🖼️ Image + Video AI</div>
-        <div class="badge">🎯 Natural Affiliate</div>
-        <div class="badge">🔥 Viral-Ready</div>
+        <div class="badge">⚡ Funnel-based</div>
+        <div class="badge">🎯 Natural Content</div>
+        <div class="badge">🔥 High Conversion</div>
       </div>
 
-      <!-- CTA TO HOOK TOOL -->
       <div class="cta-wrap">
         <a href="hook.html">
           <button class="cta-hook">🎯 Mulai dari Hook</button>
@@ -211,84 +188,43 @@
       </div>
     </section>
 
-    <!-- PROBLEM -->
+    <!-- FLOW -->
     <section class="section">
-      <h2>Masalah Creator Affiliate Saat Ini</h2>
-
-      <div class="cards">
-        <div class="card">
-          <h3>Prompt AI Terlalu Generik</h3>
-          <p>
-            Hasil konten mirip semua, tidak punya identitas,
-            dan sulit membangun trust audience.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Konten Terlihat “AI Banget”</h3>
-          <p>
-            Tidak natural, tidak relatable,
-            dan sering gagal menarik emosi di 3 detik pertama.
-          </p>
-        </div>
-
-        <div class="card">
-          <h3>Creator Kehilangan Arah Funnel</h3>
-          <p>
-            Hook, problem, solution, CTA tercampur.
-            Akhirnya konten tidak fokus dan tidak konversi.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SOLUTION -->
-    <section class="section">
-      <h2>AffiliGen AI Mengubah Cara Kamu Membuat Konten</h2>
+      <h2>Alur Konten Affiliate yang Benar</h2>
 
       <div class="flow">
-        <div class="step">
+
+        <a href="hook.html" class="step">
           <span>STEP 1</span>
           <h4>Mulai dari Hook</h4>
-          <p>
-            Bangun perhatian dulu. Satu ide, satu fokus,
-            satu emosi kuat.
-          </p>
-        </div>
+          <p>Bangun perhatian dalam 3 detik pertama.</p>
+        </a>
 
-        <div class="step">
+        <a href="problem.html" class="step">
           <span>STEP 2</span>
           <h4>Problem & Pain Point</h4>
-          <p>
-            Konten terasa “gue banget”.
-            Relatable sebelum jualan.
-          </p>
-        </div>
+          <p>Relatable sebelum jualan.</p>
+        </a>
 
-        <div class="step">
+        <a href="solution.html" class="step">
           <span>STEP 3</span>
           <h4>Solution & Transformasi</h4>
-          <p>
-            Produk masuk natural,
-            bukan dipaksakan.
-          </p>
-        </div>
+          <p>Produk masuk natural.</p>
+        </a>
 
-        <div class="step">
+        <a href="cta.html" class="step">
           <span>STEP 4</span>
-          <h4>CTA yang Manusiawi</h4>
-          <p>
-            Jualan tanpa terasa jualan.
-            Trust → klik → konversi.
-          </p>
-        </div>
+          <h4>CTA Manusiawi</h4>
+          <p>Trust → klik → konversi.</p>
+        </a>
+
       </div>
     </section>
 
     <footer>
       <div><strong>AffiliGen AI</strong></div>
-      <div>AI Prompt System for Affiliate Creators</div>
-      <div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
+      <div>AI Funnel System for Affiliate Creators</div>
+      <div style="margin-top:6px">© 2026</div>
     </footer>
 
   </div>
