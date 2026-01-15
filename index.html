@@ -52,6 +52,8 @@
   <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
   <div id="videoOut" class="output">—</div>
   <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
+    <button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
+    <button class="copyBtn" onclick="exportPrompt('md')">⬇️ Download Prompt (.md)</button>
 </div><footer>© 2026 AffiliGen AI — Build with GitHub + Vercel</footer>
 </div><script>
 function previewImages(input, target){
@@ -69,16 +71,50 @@ modelImg.onchange=()=>previewImages(modelImg,'modelPreview');
 function copyText(id){navigator.clipboard.writeText(document.getElementById(id).innerText);alert('Prompt berhasil disalin ✅')}
 
 function generate(){
-  const focusMap={
-  hook:{
-    t:'HOOK – STOP SCROLLING',
-    v:'Extreme contrast, shocking first frame',
-    copy:[
-      'Gue kira ini HOAX… ternyata hasilnya gila 😳',
-      'Stop scroll! Ini alasan kenapa banyak orang nyesel telat tau ini',
-      'Jujur, ini bikin hidup gue lebih gampang…'
-    ]
-  },
+  const focusMap={hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Gue kira ini HOAX… ternyata hasilnya gila 😳','Stop scroll! Ini alasan kenapa banyak orang nyesel telat tau ini','Jujur, ini bikin hidup gue lebih gampang…']},problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Masalahnya, kebanyakan orang ngalamin ini tiap hari…','Capek nggak sih udah coba banyak cara tapi gagal terus?','Ini yang bikin orang frustrasi tapi jarang dibahas…']},solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Sampai akhirnya gue nemuin solusi ini…','Cuma pakai ini, hasilnya langsung kerasa','Ini cara paling simpel yang pernah gue coba']},cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link ada di keranjang, jangan kehabisan!','Serius, cobain sekarang sebelum nyesel','Klik sekarang, gue pakai ini juga kok']}};
+  const f=focusMap[fokus.value];
+  const platformTone=platform.value==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
+  const modeTone=mode.value==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
+  const viralLine = mode.value==='viral' ? `Suggested Viral Line: "${f.copy[Math.floor(Math.random()*f.copy.length)]}"
+
+` : '';
+
+  imageOut.innerText = `${f.t}
+IMAGE PROMPT
+
+${viralLine}Product: ${produk.value}
+Model: ${model.value}
+Use attached product & model images as visual reference (keep identity & shape consistent)
+Visual Focus: ${f.v}
+Style: ${gaya.value}
+Mood: ${platformTone} | ${modeTone}
+AI Engine: ${ai.value}`;
+
+  videoOut.innerText = `${f.t}
+IMAGE → VIDEO PROMPT
+
+Use generated image + attached references
+Motion: ${gerakan.value}
+Visual Focus: ${f.v}
+Style: ${gaya.value}
+Mood: ${platformTone} | ${modeTone}
+Format: Vertical 9:16
+Duration: 5–7s
+Goal: High CTR Affiliate Video`;
+}
+
+function exportPrompt(type='txt'){
+  const content = `=== IMAGE PROMPT ===
+${imageOut.innerText}
+
+=== VIDEO PROMPT ===
+${videoOut.innerText}`;
+  const blob = new Blob([content], {type:'text/plain'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `AffiliGen_Prompt.${type}`;
+  link.click();
+},
   problem:{
     t:'PROBLEM – PAIN POINT',
     v:'Raw emotion, relatable struggle',
