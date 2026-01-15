@@ -1,0 +1,155 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AffiliGen AI - Funnel Multi-Step</title><style>
+body{margin:0;font-family:Arial,sans-serif;background:radial-gradient(circle at top,#0f172a,#020617 70%);color:#e5e7eb;}
+.container{max-width:1000px;margin:auto;padding:20px;}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:40px;}
+.hero h1{font-size:38px;background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);-webkit-background-clip:text;color:transparent;}
+.hero p{opacity:.85;font-size:16px;}
+.cta-wrap{text-align:center;margin-top:20px;}
+.cta-btn{padding:14px 32px;font-size:16px;font-weight:bold;border:none;border-radius:14px;cursor:pointer;background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);color:#020617;box-shadow:0 0 30px rgba(56,189,248,.5),0 0 40px rgba(168,85,247,.4),0 0 50px rgba(236,72,153,.3);transition:.25s ease;}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 60px rgba(56,189,248,.7),0 0 70px rgba(168,85,247,.5),0 0 80px rgba(236,72,153,.4);}
+
+/* CARD INPUT */
+.card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:24px;margin-bottom:24px;box-shadow:0 12px 36px rgba(0,0,0,.5);}
+.card label{display:block;margin-top:12px;font-weight:bold;font-size:14px;}
+.card textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px;}
+.card button{margin-top:20px;padding:14px;width:100%;border-radius:12px;border:none;background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);color:#020617;font-weight:bold;cursor:pointer;transition:.25s;}
+.card button:hover{box-shadow:0 0 28px rgba(56,189,248,.6),0 0 40px rgba(168,85,247,.4),0 0 50px rgba(236,72,153,.3);}
+
+/* Preview */
+.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.preview img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3);box-shadow:0 0 6px rgba(56,189,248,.5),0 0 6px rgba(168,85,247,.5),0 0 6px rgba(236,72,153,.5);}
+.output{margin-top:12px;padding:14px;background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:14px;white-space:pre-wrap;font-size:13px;}
+.copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3);}
+
+/* Progress */
+.progress{display:flex;justify-content:space-between;margin-top:20px;margin-bottom:20px;}
+.progress-step{flex:1;height:8px;margin:0 4px;background:rgba(56,189,248,.2);border-radius:4px;transition:.3s;}
+.progress-step.active{background:linear-gradient(90deg,#38bdf8,#a855f7,#ec4899);}
+</style></head>
+<body>
+<div class="container"><section class="hero">
+<h1>AffiliGen AI 🇮🇩</h1>
+<p>Multi-Step Funnel AI-ready Tool — Hook → Problem → Solution → CTA</p>
+<div class="cta-wrap">
+<a href="#input-section"><button class="cta-btn">🚀 Mulai Funnel</button></a>
+</div>
+</section><div id="input-section" class="card">
+<div class="progress">
+<div id="stepHook" class="progress-step active"></div>
+<div id="stepProblem" class="progress-step"></div>
+<div id="stepSolution" class="progress-step"></div>
+<div id="stepCTA" class="progress-step"></div>
+</div><label>Step Funnel</label> <select id="funnelStep">
+
+<option value="hook">Hook – Stop Scroll</option>
+<option value="problem">Problem – Pain Point</option>
+<option value="solution">Solution – Transformasi</option>
+<option value="cta">CTA – Jualan</option>
+</select><label>Referensi Produk</label>
+
+<textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea><input type="file" id="produkImg" accept="image/*" multiple>
+<div id="produkPreview" class="preview"></div><label>Referensi Model</label>
+
+<textarea id="model" placeholder="Contoh: Wanita Indonesia 20-an"></textarea><input type="file" id="modelImg" accept="image/*" multiple>
+<div id="modelPreview" class="preview"></div><label>Referensi Gerakan / Motion</label>
+
+<textarea id="gerakan" placeholder="Contoh: Unboxing, close-up, before-after"></textarea><label>Gaya Visual</label> <input id="gaya" placeholder="cinematic / clean / dramatic" />
+
+<h3>Preview Prompt</h3>
+<div id="previewPrompt" class="output">—</div>
+<button onclick="saveNextStep()">💾 Simpan & Next</button>
+<button class="copyBtn" onclick="copyText('previewPrompt')">📋 Copy Prompt</button>
+</div><script>
+// --- Preview Images ---
+function previewImages(input, targetId){
+  const preview = document.getElementById(targetId);
+  preview.innerHTML='';
+  Array.from(input.files).slice(0,5).forEach(file=>{
+    const img=document.createElement('img');
+    img.src=URL.createObjectURL(file);
+    preview.appendChild(img);
+  });
+  if(input.files.length>5) alert('Maksimal 5 gambar saja!');
+}
+produkImg.onchange=()=>previewImages(produkImg,'produkPreview');
+modelImg.onchange=()=>previewImages(modelImg,'modelPreview');
+
+// --- Local Storage ---
+function saveInput(){
+  const data={
+    produk:produk.value,
+    model:model.value,
+    gerakan:gerakan.value,
+    gaya:gaya.value,
+    funnelStep:funnelStep.value
+  };
+  localStorage.setItem('funnelData',JSON.stringify(data));
+}
+
+function loadInput(){
+  const data=JSON.parse(localStorage.getItem('funnelData')||'{}');
+  if(data.produk) produk.value=data.produk;
+  if(data.model) model.value=data.model;
+  if(data.gerakan) gerakan.value=data.gerakan;
+  if(data.gaya) gaya.value=data.gaya;
+  if(data.funnelStep) funnelStep.value=data.funnelStep;
+  updatePreview();
+}
+
+// --- Preview Prompt ---
+function updatePreview(){
+  const stepMap={
+    hook:'HOOK – STOP SCROLL: Fokus attention, shocking first frame',
+    problem:'PROBLEM – PAIN POINT: Relatable struggle & emotion',
+    solution:'SOLUTION – TRANSFORMATION: Visual result & benefit',
+    cta:'CTA – ACTION: Call-to-action & urgency'
+  };
+  const step=funnelStep.value;
+  const prompt=`${stepMap[step]}\n\nProduk: ${produk.value}\nModel: ${model.value}\nGerakan: ${gerakan.value}\nStyle: ${gaya.value}\nGunakan gambar yang di-upload sebagai referensi visual.`;
+  previewPrompt.innerText=prompt;
+  updateProgress(step);
+}
+
+function updateProgress(step){
+  document.getElementById('stepHook').classList.remove('active');
+  document.getElementById('stepProblem').classList.remove('active');
+  document.getElementById('stepSolution').classList.remove('active');
+  document.getElementById('stepCTA').classList.remove('active');
+  if(step==='hook') document.getElementById('stepHook').classList.add('active');
+  if(step==='problem') document.getElementById('stepProblem').classList.add('active');
+  if(step==='solution') document.getElementById('stepSolution').classList.add('active');
+  if(step==='cta') document.getElementById('stepCTA').classList.add('active');
+}
+
+// --- Save & Next Step ---
+function saveNextStep(){
+  saveInput();
+  const steps=['hook','problem','solution','cta'];
+  let idx=steps.indexOf(funnelStep.value);
+  idx=(idx+1)%steps.length;
+  funnelStep.value=steps[idx];
+  updatePreview();
+}
+
+// --- Copy Text ---
+function copyText(id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+  alert('Prompt berhasil disalin ✅');
+}
+
+// --- Event Listeners ---
+produk.addEventListener('input',updatePreview);
+model.addEventListener('input',updatePreview);
+gerakan.addEventListener('input',updatePreview);
+gaya.addEventListener('input',updatePreview);
+funnelStep.addEventListener('change',updatePreview);
+
+window.addEventListener('DOMContentLoaded',loadInput);
+</script></body>
+</html>
