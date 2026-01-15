@@ -1,0 +1,82 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AffiliGen AI – Hook Generator</title>
+  <style>
+    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
+    .container{max-width:900px;margin:auto;padding:24px}
+    .hero{text-align:center;margin-bottom:40px}
+    .hero h1{font-size:34px;color:#38bdf8}
+    .hero p{opacity:.85}
+    .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
+    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
+    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
+    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
+    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
+    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
+    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
+    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
+  </style>
+</head>
+<body>
+<div class="container"><section class="hero">
+  <h1>🎯 Hook Generator</h1>
+  <p>Bikin 3 detik pertama videomu <b>menghentikan scroll</b>.<br>
+  Fokus ke <b>Hook Image + Hook Video</b> (natural, bukan AI banget).</p>
+</section><div class="card">
+  <label>Produk / Topik</label>
+  <textarea id="produk" placeholder="Contoh: Serum wajah untuk jerawat"></textarea><label>Target Audience</label> <input id="audience" placeholder="Wanita 18–30, acne problem" />
+
+<label>Emosi Utama</label> <select id="emosi"> <option value="shock">Shock / Kaget</option> <option value="relate">Relate / Nyata</option> <option value="curious">Penasaran</option> <option value="fear">Takut rugi</option> </select>
+
+<label>Gaya Konten</label> <select id="style"> <option value="ugc">UGC / Natural</option> <option value="cinematic">Cinematic</option> <option value="story">Storytelling</option> </select>
+
+<button onclick="generateHook()">🔥 Generate Hook</button>
+
+</div><div class="card">
+  <h3>🖼️ Hook – Image Prompt</h3>
+  <div id="imageOut" class="output">—</div>
+  <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Hook – Video Prompt</h3>
+  <div id="videoOut" class="output">—</div>
+  <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
+</div><footer>
+  <div><b>AffiliGen AI</b> – Hook Tool</div>
+  <div>One purpose. One job. Higher CTR.</div>
+</footer>
+</div><script>
+function copyText(id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+  alert('Copied ✅');
+}
+
+function generateHook(){
+  const hookLine={
+    shock:'Orang jarang sadar masalah ini…',
+    relate:'Gue juga ngalamin ini…',
+    curious:'Awalnya gue kira ini biasa aja…',
+    fear:'Kalau kamu masih lakuin ini, stop.'
+  };
+
+  imageOut.innerText=`HOOK IMAGE PROMPT
+
+Scene: First frame that instantly stops scrolling
+Product: ${produk.value}
+Audience: ${audience.value}
+Expression: Strong facial emotion (${emosi.value})
+Composition: Close-up, imperfect, real human feel
+Style: ${style.value}, natural lighting, handheld look
+Text overlay idea: "${hookLine[emosi.value]}"`;
+
+  videoOut.innerText=`HOOK VIDEO PROMPT
+
+Opening 1–2 seconds
+Camera: Handheld / phone-style
+Action: Direct eye contact to camera
+Dialogue idea: "${hookLine[emosi.value]}"
+Pacing: Fast cut, no intro
+Goal: Stop scroll & force curiosity
+Format: Vertical 9:16`;
+}
+</script></body>
+</html>
