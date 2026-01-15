@@ -251,13 +251,11 @@ footer{
     <div class="hint">Instruksi aksi yang jelas & mudah diikuti.</div>
     <!-- Tombol menuju Final Prompt Output -->
 <div style="margin-top:20px; text-align:center;">
-  <a href="output.html">
-    <button style="padding:14px 28px; border:none; border-radius:14px; background:#38bdf8; color:#020617; font-weight:bold; cursor:pointer;">
-      ➡️ Lihat Final Prompt
-    </button>
-  </a>
+  <button onclick="saveInputAndGoNext('output.html')"
+          style="padding:14px 28px; border:none; border-radius:14px; background:#38bdf8; color:#020617; font-weight:bold; cursor:pointer;">
+    ➡️ Lihat Final Prompt
+  </button>
 </div>
-
     <!-- CTA Navigation -->
     <div class="cta-wrap">
       <a href="solution.html" class="btn btn-back">⬅ Kembali ke Solution</a>
@@ -295,6 +293,27 @@ function previewImages(input,targetId){
 }
 document.getElementById('produkImg').addEventListener('change',function(){previewImages(this,'produkPreview');});
 document.getElementById('modelImg').addEventListener('change',function(){previewImages(this,'modelPreview');});
+<script>
+// Simpan input ke localStorage saat tombol lanjut diklik
+function saveInputAndGoNext(nextPage){
+  // Ambil semua input yang relevan
+  const hook = document.getElementById('hookInput') ? document.getElementById('hookInput').value : '';
+  const problem = document.getElementById('problemInput') ? document.getElementById('problemInput').value : '';
+  const solution = document.getElementById('solutionInput') ? document.getElementById('solutionInput').value : '';
+  const cta = document.getElementById('ctaInput') ? document.getElementById('ctaInput').value : '';
+  const ai = document.getElementById('aiEngine') ? document.getElementById('aiEngine').value : '';
+
+  // Simpan ke localStorage
+  localStorage.setItem('hook', hook);
+  localStorage.setItem('problem', problem);
+  localStorage.setItem('solution', solution);
+  localStorage.setItem('cta', cta);
+  localStorage.setItem('aiEngine', ai);
+
+  // Pindah halaman
+  window.location.href = nextPage;
+}
+</script>
 </script>
 </body>
                                                                                      </html>
