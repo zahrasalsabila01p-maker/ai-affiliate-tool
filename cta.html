@@ -1,98 +1,200 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CTA Tool – AffiliGen AI</title>  <style>
-    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
-    .container{max-width:860px;margin:auto;padding:24px}
-    .hero{text-align:center;margin-bottom:36px}
-    .hero h1{font-size:36px;color:#38bdf8;margin-bottom:6px}
-    .hero p{opacity:.85;font-size:15px}
-    .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
-    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
-    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
-    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
-    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
-    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
-    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
-    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
-  </style></head>
-<body>
-<div class="container"><section class="hero">
-  <h1>🛒 CTA Tool</h1>
-  <p>Mengajak <b>action secara halus</b> tanpa terlihat jualan.<br>
-  Trust → Urgency → Action.</p>
-</section><div class="card">
-  <label>1️⃣ Produk</label>
-  <textarea id="produk" placeholder="Contoh: Serum acne brand lokal"></textarea><label>2️⃣ Benefit Utama</label>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTA Tool — AffiliGen AI</title>
 
-  <textarea id="benefit" placeholder="Kulit lebih bersih, hemat waktu"></textarea><label>3️⃣ Bentuk CTA</label> <select id="ctaType"> <option value="keranjang">Arahkan ke Keranjang</option> <option value="komentar">Ajak Komentar</option> <option value="dm">Ajak DM</option> <option value="soft_buy">Soft Buy Sekarang</option> </select>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:radial-gradient(circle at top,#0f172a,#020617 65%);
+      color:#e5e7eb;
+    }
 
-<label>4️⃣ Alasan Bertindak Sekarang</label> <select id="urgency"> <option value="stok">Stok terbatas</option> <option value="harga">Harga promo</option> <option value="viral">Lagi viral</option> <option value="limited">Limited time</option> </select>
+    a{text-decoration:none}
 
-<label>5️⃣ Gaya Bahasa</label> <select id="tone"> <option value="santai">Santai</option> <option value="percaya">Percaya diri</option> <option value="teman">Seperti teman</option> </select>
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:40px 18px 80px;
+    }
 
-<button onclick="generateCTA()">🔥 Generate CTA</button>
+    /* HEADER */
+    .header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:30px;
+    }
 
-</div><div class="card">
-  <h3>🖼️ Image Prompt (CTA Frame)</h3>
-  <div id="imageOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt (CTA Scene)</h3>
-  <div id="videoOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>  <h3 style="margin-top:26px">🧠 Soft CTA Copy</h3>
-  <div id="copyOut" class="output">—</div>
-</div><footer>
-  <div><b>AffiliGen AI – CTA Tool</b></div>
-  <div>Build for TikTok & Shopee Affiliate</div>
-  <div style="margin-top:6px">© 2026</div>
-</footer></div><script>
-function copyText(id){
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  alert('Disalin ✅');
-}
-
-function generateCTA(){
-  const produk = produk.value;
-  const benefit = benefit.value;
-  const type = ctaType.value;
-  const urgency = urgency.value;
-  const tone = tone.value;
-
-  const ctaMap={
-    keranjang:'Arahkan visual ke ikon keranjang',
-    komentar:'Arahkan gesture ke kolom komentar',
-    dm:'Arahkan teks ke DM',
-    soft_buy:'Ajakan beli tanpa tekanan'
-  };
-
-  const urgencyMap={
-    stok:'stok mulai menipis',
-    harga:'harga lagi promo',
-    viral:'lagi banyak dicari',
-    limited:'waktunya terbatas'
-  };
-
-  imageOut.innerText = `CTA IMAGE PROMPT\n\nProduct: ${produk}\nMain Benefit: ${benefit}\nCTA Visual Cue: ${ctaMap[type]}\nEmotion: Calm confidence\nLighting: Bright & trustworthy\nComposition: Clear CTA focus\nGoal: Invite action naturally`;
-
-  videoOut.innerText = `CTA VIDEO PROMPT (Image → Video)\n\nUse CTA image as base\nMotion: Small gesture, eye contact\nDuration: 2–3 seconds\nCTA Type: ${type}\nUrgency Cue: ${urgencyMap[urgency]}\nFormat: Vertical 9:16\nGoal: Trigger action without pressure`;
-
-  copyOut.innerText = `SOFT CTA COPY\n\nKalau kamu juga pengen ${benefit},\n${produk} ini ${urgencyMap[urgency]}.\nCek ${type==='keranjang'?'di keranjang ya':'di sini'} 👌`;
-}
-</script></body>
-  </html>
- <div style="margin-top:40px;text-align:center">
-    <a href="index.html" style="
-      display:inline-block;
-      padding:14px 28px;
+    .logo{
+      width:48px;
+      height:48px;
       border-radius:14px;
-      background:#ef4444;
-      color:white;
-      font-weight:700;
-      text-decoration:none;
-    ">
-      🔁 Kembali ke Awal
-    </a>
-  </div>
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 30px rgba(56,189,248,.6);
+    }
 
+    h1{
+      margin:0;
+      font-size:32px;
+      color:#38bdf8;
+    }
+
+    .subtitle{
+      opacity:.85;
+      margin-top:6px;
+    }
+
+    /* CARD */
+    .card{
+      background:rgba(2,6,23,.92);
+      border:1px solid rgba(56,189,248,.18);
+      border-radius:22px;
+      padding:28px;
+      margin-top:36px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
+
+    .card h2{
+      margin-top:0;
+      color:#7dd3fc;
+      font-size:22px;
+    }
+
+    label{
+      display:block;
+      margin-top:22px;
+      margin-bottom:6px;
+      font-size:14px;
+      font-weight:600;
+      opacity:.9;
+    }
+
+    textarea{
+      width:100%;
+      min-height:90px;
+      resize:vertical;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(56,189,248,.25);
+      background:#020617;
+      color:#e5e7eb;
+      font-size:14px;
+    }
+
+    textarea:focus{
+      outline:none;
+      border-color:#38bdf8;
+      box-shadow:0 0 18px rgba(56,189,248,.35);
+    }
+
+    .hint{
+      font-size:13px;
+      opacity:.65;
+      margin-top:6px;
+    }
+
+    /* CTA BUTTONS */
+    .cta-wrap{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      margin-top:36px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      flex:1;
+      padding:16px 22px;
+      font-size:15px;
+      font-weight:800;
+      border-radius:18px;
+      border:none;
+      cursor:pointer;
+      text-align:center;
+      transition:.25s ease;
+    }
+
+    .btn-back{
+      background:#020617;
+      color:#38bdf8;
+      border:1px solid rgba(56,189,248,.35);
+    }
+
+    .btn-back:hover{
+      box-shadow:0 0 24px rgba(56,189,248,.4);
+    }
+
+    .btn-finish{
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      box-shadow:0 0 36px rgba(56,189,248,.55);
+    }
+
+    .btn-finish:hover{
+      transform:translateY(-2px);
+      box-shadow:0 0 60px rgba(56,189,248,.85);
+    }
+
+    /* FOOTER */
+    footer{
+      margin-top:70px;
+      text-align:center;
+      font-size:13px;
+      opacity:.6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">AG</div>
+      <div>
+        <h1>CTA Tool</h1>
+        <div class="subtitle">Step 4 — Closing tanpa terasa jualan</div>
+      </div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+      <h2>🛒 Call To Action yang Manusiawi</h2>
+
+      <label>Trust Cue</label>
+      <textarea placeholder="Aku pakai ini sendiri, bukan cuma buat konten"></textarea>
+      <div class="hint">Bangun kepercayaan sebelum minta klik.</div>
+
+      <label>Urgency / Scarcity</label>
+      <textarea placeholder="Stok sering habis, dan harga bisa naik kapan aja"></textarea>
+      <div class="hint">Dorongan lembut, bukan maksa.</div>
+
+      <label>CTA Kalimat Natural</label>
+      <textarea placeholder="Kalau kamu ngerasa ini relate, link-nya aku taruh di keranjang ya"></textarea>
+      <div class="hint">Seperti ngobrol, bukan sales.</div>
+
+      <!-- CTA -->
+      <div class="cta-wrap">
+        <a href="solution.html" class="btn btn-back">⬅ Kembali ke Solution</a>
+        <a href="index.html" class="btn btn-finish">🎉 Selesai & Kembali ke Home</a>
+      </div>
+    </div>
+
+    <footer>
+      <div><strong>AffiliGen AI</strong></div>
+      <div>Hook → Problem → Solution → CTA</div>
+    </footer>
+
+  </div>
 </body>
 </html>
