@@ -69,12 +69,62 @@ modelImg.onchange=()=>previewImages(modelImg,'modelPreview');
 function copyText(id){navigator.clipboard.writeText(document.getElementById(id).innerText);alert('Prompt berhasil disalin ✅')}
 
 function generate(){
-  const focusMap={hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame'},problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle'},solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result'},cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA'}};
+  const focusMap={
+  hook:{
+    t:'HOOK – STOP SCROLLING',
+    v:'Extreme contrast, shocking first frame',
+    copy:[
+      'Gue kira ini HOAX… ternyata hasilnya gila 😳',
+      'Stop scroll! Ini alasan kenapa banyak orang nyesel telat tau ini',
+      'Jujur, ini bikin hidup gue lebih gampang…'
+    ]
+  },
+  problem:{
+    t:'PROBLEM – PAIN POINT',
+    v:'Raw emotion, relatable struggle',
+    copy:[
+      'Masalahnya, kebanyakan orang ngalamin ini tiap hari…',
+      'Capek nggak sih udah coba banyak cara tapi gagal terus?',
+      'Ini yang bikin orang frustrasi tapi jarang dibahas…'
+    ]
+  },
+  solution:{
+    t:'SOLUTION – TRANSFORMATION',
+    v:'Clear demo, satisfying result',
+    copy:[
+      'Sampai akhirnya gue nemuin solusi ini…',
+      'Cuma pakai ini, hasilnya langsung kerasa',
+      'Ini cara paling simpel yang pernah gue coba'
+    ]
+  },
+  cta:{
+    t:'CTA – SELLING MOMENT',
+    v:'Trust cue, urgency CTA',
+    copy:[
+      'Link ada di keranjang, jangan kehabisan!',
+      'Serius, cobain sekarang sebelum nyesel',
+      'Klik sekarang, gue pakai ini juga kok'
+    ]
+  }
+};
   const f=focusMap[fokus.value];
   const platformTone=platform.value==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
   const modeTone=mode.value==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
 
-  imageOut.innerText=`${f.t}\nIMAGE PROMPT\n\nProduct: ${produk.value}\nModel: ${model.value}\nUse attached product & model images as visual reference (keep identity & shape consistent)\nVisual Focus: ${f.v}\nStyle: ${gaya.value}\nMood: ${platformTone} | ${modeTone}\nAI Engine: ${ai.value}`;
+  const viralLine = mode.value==='viral' ? `Suggested Viral Hook Line: "${f.copy[Math.floor(Math.random()*f.copy.length)]}"
+
+` : '';
+
+  imageOut.innerText = `${f.t}
+IMAGE PROMPT
+
+${viralLine}Product: ${produk.value}
+Model: ${model.value}
+Use attached product & model images as visual reference (keep identity & shape consistent)
+Visual Focus: ${f.v}
+Style: ${gaya.value}
+Mood: ${platformTone} | ${modeTone}
+AI Engine: ${ai.value}`;
 
   videoOut.innerText=`${f.t}\nIMAGE → VIDEO PROMPT\n\nUse generated image + attached references\nMotion: ${gerakan.value}\nVisual Focus: ${f.v}\nStyle: ${gaya.value}\nMood: ${platformTone} | ${modeTone}\nFormat: Vertical 9:16\nDuration: 5–7s\nGoal: High CTR Affiliate Video`;
 }
