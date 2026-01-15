@@ -50,6 +50,8 @@
 
 <label>7️⃣ Fokus Funnel</label> <select id="fokus"> <option value="hook">Hook – Stop Scroll</option> <option value="problem">Problem – Pain Point</option> <option value="solution">Solution – Transformasi</option> <option value="cta">CTA – Jualan</option> </select>
 
+<label>8️⃣ Preset Niche Affiliate</label> <select id="preset"> <option value="general">General Affiliate</option> <option value="beauty">Beauty / Skincare</option> <option value="fashion">Fashion</option> <option value="gadget">Gadget / Tech</option> <option value="food">Food / Minuman</option> <option value="health">Health / Fitness</option> </select>
+
 <label>🔥 Mode Prompt</label> <select id="mode"> <option value="normal">Normal Mode</option> <option value="viral">🔥 Affiliate Viral Mode</option> </select>
 
 <button onclick="generate()">🚀 Generate Prompt</button>
@@ -101,6 +103,15 @@ function generate(){
     Pika:'Dynamic camera, fast social motion'
   };
 
+  const nichePreset={
+    general:'Balanced commercial look, broad appeal',
+    beauty:'Clean skin tone, soft lighting, aesthetic beauty shot',
+    fashion:'Stylish pose, confident expression, editorial look',
+    gadget:'Sharp product focus, tech lighting, modern vibe',
+    food:'Appetizing close-up, warm lighting, fresh texture',
+    health:'Energetic body language, healthy lifestyle mood'
+  };
+
   const f=focusMap[fokus.value];
   const platformTone=platform.value==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
   const modeTone=mode.value==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
@@ -117,7 +128,8 @@ Use attached images as reference (keep identity consistent)
 Visual Focus: ${f.v}
 Style: ${gaya.value}
 Mood: ${platformTone} | ${modeTone}
-AI Style: ${aiStyle[ai.value]}`;
+AI Style: ${aiStyle[ai.value]}
+Niche Preset: ${nichePreset[preset.value]}`;
 
   videoOut.innerText = `${f.t}
 IMAGE → VIDEO PROMPT
@@ -146,4 +158,4 @@ ${videoOut.innerText}`;
   link.click();
 }
 </script></body>
-    </html>
+</html>
