@@ -100,6 +100,25 @@ Goal: High CTR Affiliate Video`;
   document.getElementById('imageOut').innerText = imagePrompt;
   document.getElementById('videoOut').innerText = videoPrompt;
 }
+  <script>
+// Ambil data dari localStorage saat halaman load
+window.onload = function(){
+  const hook = localStorage.getItem('hook') || '';
+  const problem = localStorage.getItem('problem') || '';
+  const solution = localStorage.getItem('solution') || '';
+  const cta = localStorage.getItem('cta') || '';
+  const ai = localStorage.getItem('aiEngine') || 'Grok';
+
+  document.getElementById('hookInput').value = hook;
+  document.getElementById('problemInput').value = problem;
+  document.getElementById('solutionInput').value = solution;
+  document.getElementById('ctaInput').value = cta;
+  document.getElementById('aiEngine').value = ai;
+
+  // Generate otomatis saat halaman load (opsional)
+  // generateFinalPrompt();
+};
+</script>
 </script>
 
 </body>
