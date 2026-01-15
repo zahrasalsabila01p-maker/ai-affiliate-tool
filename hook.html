@@ -1,89 +1,200 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hook Tool – AffiliGen AI</title>  <style>
-    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
-    .container{max-width:860px;margin:auto;padding:24px}
-    .hero{text-align:center;margin-bottom:36px}
-    .hero h1{font-size:36px;color:#38bdf8;margin-bottom:6px}
-    .hero p{opacity:.85;font-size:15px}
-    .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
-    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
-    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
-    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
-    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
-    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
-    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
-    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
-  </style></head>
-<body>
-<div class="container"><section class="hero">
-  <h1>🎯 Hook Tool</h1>
-  <p>Bikin <b>HOOK 3 detik pertama</b> yang bikin orang berhenti scroll.<br>
-  Natural, tidak hard-selling, khusus affiliate creator.</p>
-</section><div class="card">
-  <label>1️⃣ Produk / Niche</label>
-  <textarea id="produk" placeholder="Contoh: Skincare acne, alat dapur, botol minum"></textarea><label>2️⃣ Target Audience</label>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hook Tool — AffiliGen AI</title>
 
-  <textarea id="audience" placeholder="Wanita 20–30 tahun, masalah jerawat, sibuk kerja"></textarea><label>3️⃣ Emosi Utama</label> <select id="emosi"> <option value="penasaran">Penasaran</option> <option value="takut">Takut / Waspada</option> <option value="relate">Relatable</option> <option value="senang">Senang / Puas</option> </select>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:radial-gradient(circle at top,#0f172a,#020617 65%);
+      color:#e5e7eb;
+    }
 
-<label>4️⃣ Gaya Hook</label> <select id="gaya"> <option value="pattern">Pattern Interrupt</option> <option value="shock">Shock / Surprise</option> <option value="curiosity">Curiosity Gap</option> <option value="emotional">Emotional</option> <option value="story">Mini Story</option> </select>
+    a{text-decoration:none}
 
-<button onclick="generateHook()">🚀 Generate Hook</button>
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:40px 18px 80px;
+    }
 
-</div><div class="card">
-  <h3>🖼️ Image Prompt (Hook Frame)</h3>
-  <div id="imageOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt (Hook Scene)</h3>
-  <div id="videoOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>  <h3 style="margin-top:26px">🧠 Hook Angle (Panduan Creator)</h3>
-  <div id="angleOut" class="output">—</div>
-</div><footer>
-  <div><b>AffiliGen AI – Hook Tool</b></div>
-  <div>Build for TikTok & Shopee Affiliate</div>
-  <div style="margin-top:6px">© 2026</div>
-</footer></div><script>
-function copyText(id){
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  alert('Disalin ✅');
-}
+    /* HEADER */
+    .header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:30px;
+    }
 
-function generateHook(){
-  const produk = produk.value;
-  const audience = audience.value;
-  const emosi = emosi.value;
-  const gaya = gaya.value;
-
-  const hookMap={
-    pattern:'Visual aneh, kontras ekstrem, bikin otak kaget',
-    shock:'Ekspresi kaget, gesture kuat, framing dekat',
-    curiosity:'Close-up misterius, belum jelasin hasil',
-    emotional:'Ekspresi jujur, relatable, real life',
-    story:'Awal cerita, situasi sehari-hari'
-  };
-
-  imageOut.innerText = `HOOK IMAGE PROMPT\n\nProduct/Niche: ${produk}\nTarget Audience: ${audience}\nMain Emotion: ${emosi}\nVisual Style: ${hookMap[gaya]}\nFraming: Extreme close-up, first-frame impact\nLighting: High contrast, eye-catching\nGoal: Stop scrolling in 1–2 seconds`;
-
-  videoOut.innerText = `HOOK VIDEO PROMPT (Image → Video)\n\nUse hook image as first frame\nCamera Motion: Fast, intentional movement\nDuration: 2–3 seconds\nEmotion Trigger: ${emosi}\nHook Style: ${gaya}\nFormat: Vertical 9:16\nGoal: Make viewer pause & curious`;
-
-  angleOut.innerText = `ANGLE PENJELASAN\n\nHook ini bekerja karena memancing emosi "${emosi}" pada audience ${audience}.\nFokuskan ekspresi & visual di 2 detik pertama.\nJangan jelaskan produk dulu — biarkan penonton penasaran.`;
-}
-</script></body>
-</html>
-  <div style="margin-top:40px;text-align:center">
-    <a href="problem.html" style="
-      display:inline-block;
-      padding:14px 28px;
+    .logo{
+      width:48px;
+      height:48px;
       border-radius:14px;
-      background:#38bdf8;
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
       color:#020617;
-      font-weight:700;
-      text-decoration:none;
-    ">
-      ➡️ Lanjut ke Problem
-    </a>
-  </div>
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 30px rgba(56,189,248,.6);
+    }
 
+    h1{
+      margin:0;
+      font-size:32px;
+      color:#38bdf8;
+    }
+
+    .subtitle{
+      opacity:.85;
+      margin-top:6px;
+    }
+
+    /* CARD */
+    .card{
+      background:rgba(2,6,23,.92);
+      border:1px solid rgba(56,189,248,.18);
+      border-radius:22px;
+      padding:28px;
+      margin-top:36px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
+
+    .card h2{
+      margin-top:0;
+      color:#7dd3fc;
+      font-size:22px;
+    }
+
+    label{
+      display:block;
+      margin-top:22px;
+      margin-bottom:6px;
+      font-size:14px;
+      font-weight:600;
+      opacity:.9;
+    }
+
+    textarea{
+      width:100%;
+      min-height:90px;
+      resize:vertical;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(56,189,248,.25);
+      background:#020617;
+      color:#e5e7eb;
+      font-size:14px;
+    }
+
+    textarea:focus{
+      outline:none;
+      border-color:#38bdf8;
+      box-shadow:0 0 18px rgba(56,189,248,.35);
+    }
+
+    .hint{
+      font-size:13px;
+      opacity:.65;
+      margin-top:6px;
+    }
+
+    /* CTA */
+    .cta-wrap{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      margin-top:36px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      flex:1;
+      padding:16px 22px;
+      font-size:15px;
+      font-weight:800;
+      border-radius:18px;
+      border:none;
+      cursor:pointer;
+      text-align:center;
+      transition:.25s ease;
+    }
+
+    .btn-back{
+      background:#020617;
+      color:#38bdf8;
+      border:1px solid rgba(56,189,248,.35);
+    }
+
+    .btn-back:hover{
+      box-shadow:0 0 24px rgba(56,189,248,.4);
+    }
+
+    .btn-next{
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      box-shadow:0 0 36px rgba(56,189,248,.55);
+    }
+
+    .btn-next:hover{
+      transform:translateY(-2px);
+      box-shadow:0 0 60px rgba(56,189,248,.85);
+    }
+
+    /* FOOTER */
+    footer{
+      margin-top:70px;
+      text-align:center;
+      font-size:13px;
+      opacity:.6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">AG</div>
+      <div>
+        <h1>Hook Tool</h1>
+        <div class="subtitle">Step 1 — Tangkap perhatian dalam 3 detik</div>
+      </div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+      <h2>🎯 Bangun Hook yang Kuat</h2>
+
+      <label>Topik / Produk</label>
+      <textarea placeholder="Contoh: Skincare acne, alat dapur viral, gadget murah tapi kepake"></textarea>
+      <div class="hint">Apa yang ingin kamu angkat di konten ini?</div>
+
+      <label>Target Emosi</label>
+      <textarea placeholder="Penasaran, kaget, relate, FOMO, takut salah beli"></textarea>
+      <div class="hint">Satu emosi utama saja, jangan campur.</div>
+
+      <label>Angle Hook</label>
+      <textarea placeholder="Stop scroll statement, fakta mengejutkan, pengalaman pribadi, kesalahan umum"></textarea>
+      <div class="hint">Hook bukan jualan — fokus ke perhatian.</div>
+
+      <!-- CTA -->
+      <div class="cta-wrap">
+        <a href="index.html" class="btn btn-back">⬅ Kembali</a>
+        <a href="problem.html" class="btn btn-next">Lanjut ke Problem ➜</a>
+      </div>
+    </div>
+
+    <footer>
+      <div><strong>AffiliGen AI</strong></div>
+      <div>Hook → Problem → Solution → CTA</div>
+    </footer>
+
+  </div>
 </body>
 </html>
