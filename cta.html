@@ -1,19 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTA Tool | AffiliGen AI 🇮🇩</title>
+
+  <style>
+    body{
+      margin:0;font-family:Arial,sans-serif;
+      background:linear-gradient(135deg,#020617,#0f172a);
+      color:#e5e7eb;padding:24px;
+    }
+    h1{color:#38bdf8;text-align:center;margin-bottom:24px}
+    .card{background:rgba(2,6,23,.95);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
+    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
+    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
+    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
+    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
+    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
+    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
+    .preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .preview img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3)}
+    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
+  </style>
+</head>
+<body>
+
+  <h1>CTA Tool | AffiliGen AI 🇮🇩</h1>
+
+  <div class="card">
+    <label>Produk (deskripsi)</label>
+    <textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea>
+    <label>Upload Gambar Produk (max 5)</label>
+    <input type="file" id="produkImg" accept="image/*" multiple>
+    <div id="produkPreview" class="preview"></div>
+
+    <label>Model (deskripsi)</label>
+    <textarea id="model" placeholder="Contoh: Wanita Indonesia 20-an, natural"></textarea>
+    <label>Upload Gambar Model (max 5)</label>
+    <input type="file" id="modelImg" accept="image/*" multiple>
+    <div id="modelPreview" class="preview"></div>
+
+    <label>Gaya Visual</label>
+    <input id="gaya" placeholder="cinematic / clean / dramatic">
+    <label>Gerakan</label>
+    <textarea id="gerakan" placeholder="Contoh: close-up, slow motion"></textarea>
+
+    <label>Platform Preset</label>
+    <select id="platform">
+      <option value="tiktok">TikTok Shop</option>
+      <option value="shopee">Shopee Affiliate</option>
+    </select>
+
+    <label>AI Engine</label>
+    <select id="ai">
+      <option>Grok</option>
+      <option>Midjourney</option>
+      <option>Stable Diffusion</option>
+      <option>Runway</option>
+      <option>Pika</option>
+    </select>
+
+    <label>Fokus Funnel</label>
+    <select id="fokus">
+      <option value="cta">CTA – Jualan</option>
+    </select>
+
+    <label>Preset Niche</label>
+    <select id="preset">
+      <option value="general">General Affiliate</option>
+      <option value="beauty">Beauty / Skincare</option>
+      <option value="fashion">Fashion</option>
+      <option value="gadget">Gadget / Tech</option>
+      <option value="food">Food / Minuman</option>
+      <option value="health">Health / Fitness</option>
+    </select>
+
+    <label>Mode Prompt</label>
+    <select id="mode">
+      <option value="normal">Normal Mode</option>
+      <option value="viral">🔥 Affiliate Viral Mode</option>
+    </select>
+
+    <button onclick="generate()">🚀 Generate Prompt</button>
+  </div>
+
+  <div class="card">
+    <h3>🖼️ Image Prompt</h3>
+    <div id="imageOut" class="output">—</div>
+    <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>
+
+    <h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
+    <div id="videoOut" class="output">—</div>
+    <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
+    <button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
+  </div>
+
+  <footer>
+    <div style="margin-bottom:6px;font-weight:bold">AffiliGen AI</div>
+    <div>AI Prompt System for Affiliate Creators</div>
+    <div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
+  </footer>
+
 <script>
+function copyText(id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+  alert('Prompt berhasil disalin ✅');
+}
+
 function generate(){
   const produkText = document.getElementById('produk').value;
   const modelText = document.getElementById('model').value;
-  const gerakan = document.getElementById('gerakan') ? document.getElementById('gerakan').value : '';
-  const gaya = document.getElementById('gaya') ? document.getElementById('gaya').value : '';
-  const platform = document.getElementById('platform') ? document.getElementById('platform').value : '';
-  const ai = document.getElementById('ai') ? document.getElementById('ai').value : '';
-  const preset = document.getElementById('preset') ? document.getElementById('preset').value : '';
-  const fokus = document.getElementById('fokus') ? document.getElementById('fokus').value : '';
-  const mode = document.getElementById('mode') ? document.getElementById('mode').value : '';
+  const gerakan = document.getElementById('gerakan').value;
+  const gaya = document.getElementById('gaya').value;
+  const platform = document.getElementById('platform').value;
+  const ai = document.getElementById('ai').value;
+  const preset = document.getElementById('preset').value;
+  const fokus = document.getElementById('fokus').value;
+  const mode = document.getElementById('mode').value;
 
   const focusMap={
-    hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Stop scroll! Ini alasannya…','Gue kira ini HOAX 😳','Ini bikin hidup gue lebih gampang…']},
-    problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Capek coba banyak cara tapi gagal?','Masalah ini sering diremehin…','Ini yang bikin orang frustrasi…']},
-    solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Akhirnya ketemu solusinya…','Cuma pakai ini hasilnya kerasa','Cara paling simpel yang pernah gue coba']},
     cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link di keranjang sekarang!','Jangan kehabisan, serius','Klik sekarang sebelum nyesel']}
   };
 
@@ -39,27 +145,23 @@ function generate(){
   const modeTone=mode==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
   const viralLine = mode==='viral' ? `Suggested Viral Line: "${f.copy[Math.floor(Math.random()*f.copy.length)]}"\n\n` : '';
 
-  // Ambil URL gambar Produk & Model
   const produkImgs = Array.from(document.getElementById('produkImg').files).slice(0,5).map(f=>f.name).join(', ') || 'Tidak ada gambar';
   const modelImgs = Array.from(document.getElementById('modelImg').files).slice(0,5).map(f=>f.name).join(', ') || 'Tidak ada gambar';
 
-  // IMAGE PROMPT
-  imageOut.innerText = `${f.t}
+  document.getElementById('imageOut').innerText = `${f.t}
 IMAGE PROMPT
 
 ${viralLine}Produk: ${produkText}
 Gambar Produk: ${produkImgs}
 Model: ${modelText}
 Gambar Model: ${modelImgs}
-Use attached images as reference (keep identity consistent)
 Visual Focus: ${f.v}
 Style: ${gaya}
 Mood: ${platformTone} | ${modeTone}
 AI Style: ${aiStyle[ai]}
 Niche Preset: ${nichePreset[preset]}`;
 
-  // VIDEO PROMPT
-  videoOut.innerText = `${f.t}
+  document.getElementById('videoOut').innerText = `${f.t}
 IMAGE → VIDEO PROMPT
 
 Use generated image + references
@@ -73,79 +175,35 @@ Format: Vertical 9:16
 Duration: 5–7s
 Goal: High CTR Affiliate Video`;
 }
-  </script><script>
-function generate(){
-  const produkText = document.getElementById('produk').value;
-  const modelText = document.getElementById('model').value;
-  const gerakan = document.getElementById('gerakan') ? document.getElementById('gerakan').value : '';
-  const gaya = document.getElementById('gaya') ? document.getElementById('gaya').value : '';
-  const platform = document.getElementById('platform') ? document.getElementById('platform').value : '';
-  const ai = document.getElementById('ai') ? document.getElementById('ai').value : '';
-  const preset = document.getElementById('preset') ? document.getElementById('preset').value : '';
-  const fokus = document.getElementById('fokus') ? document.getElementById('fokus').value : '';
-  const mode = document.getElementById('mode') ? document.getElementById('mode').value : '';
 
-  const focusMap={
-    hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Stop scroll! Ini alasannya…','Gue kira ini HOAX 😳','Ini bikin hidup gue lebih gampang…']},
-    problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Capek coba banyak cara tapi gagal?','Masalah ini sering diremehin…','Ini yang bikin orang frustrasi…']},
-    solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Akhirnya ketemu solusinya…','Cuma pakai ini hasilnya kerasa','Cara paling simpel yang pernah gue coba']},
-    cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link di keranjang sekarang!','Jangan kehabisan, serius','Klik sekarang sebelum nyesel']}
-  };
+function exportPrompt(){
+  const content = `=== IMAGE PROMPT ===
+${document.getElementById('imageOut').innerText}
 
-  const aiStyle={
-    Grok:'Natural language, cinematic realism, descriptive',
-    Midjourney:'Ultra-detailed, cinematic lighting, sharp focus, 8k',
-    'Stable Diffusion':'Highly detailed, realistic texture, balanced composition',
-    Runway:'Smooth cinematic motion, realistic transition',
-    Pika:'Dynamic camera, fast social motion'
-  };
-
-  const nichePreset={
-    general:'Balanced commercial look, broad appeal',
-    beauty:'Clean skin tone, soft lighting, aesthetic beauty shot',
-    fashion:'Stylish pose, confident expression, editorial look',
-    gadget:'Sharp product focus, tech lighting, modern vibe',
-    food:'Appetizing close-up, warm lighting, fresh texture',
-    health:'Energetic body language, healthy lifestyle mood'
-  };
-
-  const f=focusMap[fokus];
-  const platformTone=platform==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
-  const modeTone=mode==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
-  const viralLine = mode==='viral' ? `Suggested Viral Line: "${f.copy[Math.floor(Math.random()*f.copy.length)]}"\n\n` : '';
-
-  // Ambil URL gambar Produk & Model
-  const produkImgs = Array.from(document.getElementById('produkImg').files).slice(0,5).map(f=>f.name).join(', ') || 'Tidak ada gambar';
-  const modelImgs = Array.from(document.getElementById('modelImg').files).slice(0,5).map(f=>f.name).join(', ') || 'Tidak ada gambar';
-
-  // IMAGE PROMPT
-  imageOut.innerText = `${f.t}
-IMAGE PROMPT
-
-${viralLine}Produk: ${produkText}
-Gambar Produk: ${produkImgs}
-Model: ${modelText}
-Gambar Model: ${modelImgs}
-Use attached images as reference (keep identity consistent)
-Visual Focus: ${f.v}
-Style: ${gaya}
-Mood: ${platformTone} | ${modeTone}
-AI Style: ${aiStyle[ai]}
-Niche Preset: ${nichePreset[preset]}`;
-
-  // VIDEO PROMPT
-  videoOut.innerText = `${f.t}
-IMAGE → VIDEO PROMPT
-
-Use generated image + references
-Motion: ${gerakan}
-Visual Focus: ${f.v}
-Style: ${gaya}
-Mood: ${platformTone} | ${modeTone}
-AI Style: ${aiStyle[ai]}
-Attached Images: Produk(${produkImgs}), Model(${modelImgs})
-Format: Vertical 9:16
-Duration: 5–7s
-Goal: High CTR Affiliate Video`;
+=== VIDEO PROMPT ===
+${document.getElementById('videoOut').innerText}`;
+  const blob = new Blob([content], {type:'text/plain'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `CTA_Prompt.txt`;
+  link.click();
 }
-      </script>
+
+// Preview gambar
+function previewImages(input, targetId){
+  const preview = document.getElementById(targetId);
+  preview.innerHTML='';
+  Array.from(input.files).slice(0,5).forEach(file=>{
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    preview.appendChild(img);
+  });
+  if(input.files.length > 5) alert("Maksimal 5 gambar!");
+}
+
+document.getElementById('produkImg').addEventListener('change', function(){previewImages(this,'produkPreview');});
+document.getElementById('modelImg').addEventListener('change', function(){previewImages(this,'modelPreview');});
+</script>
+
+</body>
+</html>
