@@ -140,6 +140,7 @@ Visual Focus: ${f.v}
 Style: ${gaya.value}
 Mood: ${platformTone} | ${modeTone}
 AI Style: ${aiStyle[ai.value]}
+Niche Preset: ${nichePreset[preset.value]}
 Format: Vertical 9:16
 Duration: 5–7s
 Goal: High CTR Affiliate Video`;
@@ -151,7 +152,8 @@ ${imageOut.innerText}
 
 === VIDEO PROMPT ===
 ${videoOut.innerText}`;
-  const blob = new Blob([content], {type:'text/plain'});
+  const mime = type==='md' ? 'text/markdown' : 'text/plain';
+  const blob = new Blob([content], {type:mime});
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
   link.download = `AffiliGen_Prompt.${type}`;
