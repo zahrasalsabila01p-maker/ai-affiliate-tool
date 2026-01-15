@@ -4,8 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CTA Tool — AffiliGen AI</title>
+
 <style>
 *{box-sizing:border-box}
+
 /* === CYBERPUNK PROGRESS INDICATOR === */
 .progress-wrap{
   display:flex;
@@ -15,7 +17,6 @@
   margin:30px auto 40px;
   max-width:700px;
 }
-
 .progress-step{
   width:64px;
   height:64px;
@@ -31,28 +32,22 @@
   justify-content:center;
   transition:.3s;
 }
-
 .progress-step span{
   font-size:11px;
   font-weight:500;
   margin-top:3px;
 }
-
 .progress-line{
   width:36px;
   height:3px;
   background:rgba(56,189,248,.25);
 }
-
-/* ACTIVE */
 .progress-step.active{
   background:linear-gradient(135deg,#38bdf8,#22d3ee);
   color:#020617;
   box-shadow:0 0 25px rgba(56,189,248,.8);
   border:none;
 }
-
-/* DONE */
 .progress-step.done{
   color:#38bdf8;
   border-color:#38bdf8;
@@ -64,7 +59,6 @@ body{
   background:radial-gradient(circle at top,#0f172a,#020617 65%);
   color:#e5e7eb;
 }
-
 a{text-decoration:none}
 
 .container{
@@ -80,7 +74,6 @@ a{text-decoration:none}
   gap:14px;
   margin-bottom:30px;
 }
-
 .logo{
   width:48px;
   height:48px;
@@ -93,13 +86,11 @@ a{text-decoration:none}
   justify-content:center;
   box-shadow:0 0 30px rgba(56,189,248,.6);
 }
-
 h1{
   margin:0;
   font-size:32px;
   color:#38bdf8;
 }
-
 .subtitle{
   opacity:.85;
   margin-top:6px;
@@ -114,13 +105,11 @@ h1{
   margin-top:36px;
   box-shadow:0 18px 45px rgba(0,0,0,.45);
 }
-
 .card h2{
   margin-top:0;
   color:#7dd3fc;
   font-size:22px;
 }
-
 label{
   display:block;
   margin-top:22px;
@@ -129,8 +118,7 @@ label{
   font-weight:600;
   opacity:.9;
 }
-
-textarea,input{
+textarea{
   width:100%;
   min-height:90px;
   resize:vertical;
@@ -141,20 +129,18 @@ textarea,input{
   color:#e5e7eb;
   font-size:14px;
 }
-
-textarea:focus,input:focus{
+textarea:focus{
   outline:none;
   border-color:#38bdf8;
   box-shadow:0 0 18px rgba(56,189,248,.35);
 }
-
 .hint{
   font-size:13px;
   opacity:.65;
   margin-top:6px;
 }
 
-/* CTA */
+/* CTA NAV */
 .cta-wrap{
   display:flex;
   justify-content:space-between;
@@ -162,7 +148,6 @@ textarea:focus,input:focus{
   margin-top:36px;
   flex-wrap:wrap;
 }
-
 .btn{
   flex:1;
   padding:16px 22px;
@@ -174,29 +159,25 @@ textarea:focus,input:focus{
   text-align:center;
   transition:.25s ease;
 }
-
 .btn-back{
   background:#020617;
   color:#38bdf8;
   border:1px solid rgba(56,189,248,.35);
 }
-
 .btn-back:hover{
   box-shadow:0 0 24px rgba(56,189,248,.4);
 }
-
 .btn-next{
   background:linear-gradient(135deg,#38bdf8,#22d3ee);
   color:#020617;
   box-shadow:0 0 36px rgba(56,189,248,.55);
 }
-
 .btn-next:hover{
   transform:translateY(-2px);
   box-shadow:0 0 60px rgba(56,189,248,.85);
 }
 
-/* PREVIEW IMAGE */
+/* PREVIEW IMAGES */
 .preview{
   display:flex;
   gap:8px;
@@ -223,7 +204,7 @@ footer{
 </head>
 <body>
 
-<!-- PROGRESS FUNNEL -->
+<!-- PROGRESS -->
 <div class="progress-wrap">
   <div class="progress-step" data-page="hook.html">1<br><span>Hook</span></div>
   <div class="progress-line"></div>
@@ -235,44 +216,44 @@ footer{
 </div>
 
 <div class="container">
-
   <!-- HEADER -->
   <div class="header">
     <div class="logo">AG</div>
     <div>
       <h1>CTA Tool</h1>
-      <div class="subtitle">Step 4 — CTA / Selling Moment</div>
+      <div class="subtitle">Step 4 — Penutup & CTA</div>
     </div>
   </div>
 
   <!-- MAIN CARD -->
   <div class="card">
-    <!-- 1️⃣ Upload Gambar Produk -->
+    <!-- Upload Images -->
     <label>Upload Gambar Produk (max 5)</label>
     <input type="file" id="produkImg" accept="image/*" multiple>
     <div id="produkPreview" class="preview"></div>
 
-    <!-- 2️⃣ Upload Gambar Model -->
     <label>Upload Gambar Model (max 5)</label>
     <input type="file" id="modelImg" accept="image/*" multiple>
     <div id="modelPreview" class="preview"></div>
 
-    <label>Call to Action Utama</label>
-    <textarea placeholder="Contoh: Klik sekarang sebelum kehabisan!"></textarea>
-    <div class="hint">Gunakan CTA yang natural dan menarik, jangan memaksa.</div>
+    <h2>✨ CTA & Penutup Konten</h2>
 
-    <label>Pesan Tambahan / Alasan Membeli</label>
-    <textarea placeholder="Contoh: Produk terbukti aman dan efektif"></textarea>
-    <div class="hint">Bangun trust sebelum CTA.</div>
+    <label>Pesan CTA Utama</label>
+    <textarea placeholder="Contoh: Klik sekarang untuk mendapatkan promo spesial!"></textarea>
+    <div class="hint">Buat CTA menarik & natural.</div>
 
-    <label>Format / Penempatan CTA</label>
-    <textarea placeholder="Contoh: Akhiri video dengan close-up produk + tombol link"></textarea>
-    <div class="hint">Visual & kontekstual sesuai funnel.</div>
+    <label>Urgensi / Penawaran Khusus</label>
+    <textarea placeholder="Contoh: Stok terbatas, jangan sampai kehabisan"></textarea>
+    <div class="hint">Buat audiens merasa tertarik tanpa paksaan.</div>
 
-    <!-- NAVIGATION -->
+    <label>Call-to-Action Visual / Text</label>
+    <textarea placeholder="Contoh: Tombol beli, swipe up, link di bio"></textarea>
+    <div class="hint">Instruksi aksi yang jelas & mudah diikuti.</div>
+
+    <!-- CTA Navigation -->
     <div class="cta-wrap">
       <a href="solution.html" class="btn btn-back">⬅ Kembali ke Solution</a>
-      <a href="#" class="btn btn-next">Selesai ✅</a>
+      <a href="#" class="btn btn-next" onclick="alert('Fungsi selesai / export prompt bisa ditambahkan')">Selesai ➜</a>
     </div>
   </div>
 
@@ -283,26 +264,29 @@ footer{
 </div>
 
 <script>
-// PREVIEW IMAGE
-function previewImages(input, targetId){
+// ====== PROGRESS STEP ======
+const steps = document.querySelectorAll('.progress-step');
+const currentPage = location.pathname.split('/').pop();
+let activeIndex = 0;
+steps.forEach((step,index)=>{if(step.dataset.page===currentPage){activeIndex=index;}});
+steps.forEach((step,index)=>{
+  if(index<activeIndex) step.classList.add('done');
+  if(index===activeIndex) step.classList.add('active');
+});
+
+// ====== PREVIEW GAMBAR ======
+function previewImages(input,targetId){
   const preview = document.getElementById(targetId);
-  preview.innerHTML = '';
+  preview.innerHTML='';
   Array.from(input.files).slice(0,5).forEach(file=>{
-    const img=document.createElement('img');
-    img.src=URL.createObjectURL(file);
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
     preview.appendChild(img);
   });
   if(input.files.length>5) alert("Maksimal 5 gambar!");
 }
 document.getElementById('produkImg').addEventListener('change',function(){previewImages(this,'produkPreview');});
 document.getElementById('modelImg').addEventListener('change',function(){previewImages(this,'modelPreview');});
-
-// PROGRESS STEPS
-const steps = document.querySelectorAll('.progress-step');
-const currentPage = location.pathname.split('/').pop();
-let activeIndex = 0;
-steps.forEach((step,index)=>{if(step.dataset.page===currentPage) activeIndex=index;});
-steps.forEach((step,index)=>{if(index<activeIndex) step.classList.add('done'); if(index===activeIndex) step.classList.add('active');});
 </script>
 </body>
-</html>
+                                                                                     </html>
