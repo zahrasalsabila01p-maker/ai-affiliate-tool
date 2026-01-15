@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CTA Tool — AffiliGen AI</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CTA Tool — AffiliGen AI</title>
 
-<style>
-*{box-sizing:border-box}
-
-/* === CYBERPUNK PROGRESS INDICATOR === */
+  <style>
+    *{box-sizing:border-box}
+    /* === CYBERPUNK PROGRESS INDICATOR === */
 .progress-wrap{
   display:flex;
   align-items:center;
@@ -17,6 +16,7 @@
   margin:30px auto 40px;
   max-width:700px;
 }
+
 .progress-step{
   width:64px;
   height:64px;
@@ -32,179 +32,182 @@
   justify-content:center;
   transition:.3s;
 }
+
 .progress-step span{
   font-size:11px;
   font-weight:500;
   margin-top:3px;
 }
+
 .progress-line{
   width:36px;
   height:3px;
   background:rgba(56,189,248,.25);
 }
+
+/* ACTIVE */
 .progress-step.active{
   background:linear-gradient(135deg,#38bdf8,#22d3ee);
   color:#020617;
   box-shadow:0 0 25px rgba(56,189,248,.8);
   border:none;
 }
+
+/* DONE */
 .progress-step.done{
   color:#38bdf8;
   border-color:#38bdf8;
 }
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:radial-gradient(circle at top,#0f172a,#020617 65%);
+      color:#e5e7eb;
+    }
 
-body{
-  margin:0;
-  font-family:Inter,Arial,sans-serif;
-  background:radial-gradient(circle at top,#0f172a,#020617 65%);
-  color:#e5e7eb;
-}
-a{text-decoration:none}
+    a{text-decoration:none}
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:40px 18px 80px;
-}
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:40px 18px 80px;
+    }
 
-/* HEADER */
-.header{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin-bottom:30px;
-}
-.logo{
-  width:48px;
-  height:48px;
-  border-radius:14px;
-  background:linear-gradient(135deg,#38bdf8,#22d3ee);
-  color:#020617;
-  font-weight:900;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-shadow:0 0 30px rgba(56,189,248,.6);
-}
-h1{
-  margin:0;
-  font-size:32px;
-  color:#38bdf8;
-}
-.subtitle{
-  opacity:.85;
-  margin-top:6px;
-}
+    /* HEADER */
+    .header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:30px;
+    }
 
-/* CARD */
-.card{
-  background:rgba(2,6,23,.92);
-  border:1px solid rgba(56,189,248,.18);
-  border-radius:22px;
-  padding:28px;
-  margin-top:36px;
-  box-shadow:0 18px 45px rgba(0,0,0,.45);
-}
-.card h2{
-  margin-top:0;
-  color:#7dd3fc;
-  font-size:22px;
-}
-label{
-  display:block;
-  margin-top:22px;
-  margin-bottom:6px;
-  font-size:14px;
-  font-weight:600;
-  opacity:.9;
-}
-textarea{
-  width:100%;
-  min-height:90px;
-  resize:vertical;
-  padding:14px;
-  border-radius:14px;
-  border:1px solid rgba(56,189,248,.25);
-  background:#020617;
-  color:#e5e7eb;
-  font-size:14px;
-}
-textarea:focus{
-  outline:none;
-  border-color:#38bdf8;
-  box-shadow:0 0 18px rgba(56,189,248,.35);
-}
-.hint{
-  font-size:13px;
-  opacity:.65;
-  margin-top:6px;
-}
+    .logo{
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 30px rgba(56,189,248,.6);
+    }
 
-/* CTA NAV */
-.cta-wrap{
-  display:flex;
-  justify-content:space-between;
-  gap:14px;
-  margin-top:36px;
-  flex-wrap:wrap;
-}
-.btn{
-  flex:1;
-  padding:16px 22px;
-  font-size:15px;
-  font-weight:800;
-  border-radius:18px;
-  border:none;
-  cursor:pointer;
-  text-align:center;
-  transition:.25s ease;
-}
-.btn-back{
-  background:#020617;
-  color:#38bdf8;
-  border:1px solid rgba(56,189,248,.35);
-}
-.btn-back:hover{
-  box-shadow:0 0 24px rgba(56,189,248,.4);
-}
-.btn-next{
-  background:linear-gradient(135deg,#38bdf8,#22d3ee);
-  color:#020617;
-  box-shadow:0 0 36px rgba(56,189,248,.55);
-}
-.btn-next:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 60px rgba(56,189,248,.85);
-}
+    h1{
+      margin:0;
+      font-size:32px;
+      color:#38bdf8;
+    }
 
-/* PREVIEW IMAGES */
-.preview{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
-.preview img{
-  width:70px;
-  height:70px;
-  object-fit:cover;
-  border-radius:10px;
-  border:1px solid rgba(56,189,248,.3);
-  box-shadow:0 0 6px rgba(56,189,248,.5);
-}
+    .subtitle{
+      opacity:.85;
+      margin-top:6px;
+    }
 
-/* FOOTER */
-footer{
-  margin-top:70px;
-  text-align:center;
-  font-size:13px;
-  opacity:.6;
-}
-</style>
+    /* CARD */
+    .card{
+      background:rgba(2,6,23,.92);
+      border:1px solid rgba(56,189,248,.18);
+      border-radius:22px;
+      padding:28px;
+      margin-top:36px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
+
+    .card h2{
+      margin-top:0;
+      color:#7dd3fc;
+      font-size:22px;
+    }
+
+    label{
+      display:block;
+      margin-top:22px;
+      margin-bottom:6px;
+      font-size:14px;
+      font-weight:600;
+      opacity:.9;
+    }
+
+    textarea{
+      width:100%;
+      min-height:90px;
+      resize:vertical;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(56,189,248,.25);
+      background:#020617;
+      color:#e5e7eb;
+      font-size:14px;
+    }
+
+    textarea:focus{
+      outline:none;
+      border-color:#38bdf8;
+      box-shadow:0 0 18px rgba(56,189,248,.35);
+    }
+
+    .hint{
+      font-size:13px;
+      opacity:.65;
+      margin-top:6px;
+    }
+
+    /* CTA */
+    .cta-wrap{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      margin-top:36px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      flex:1;
+      padding:16px 22px;
+      font-size:15px;
+      font-weight:800;
+      border-radius:18px;
+      border:none;
+      cursor:pointer;
+      text-align:center;
+      transition:.25s ease;
+    }
+
+    .btn-back{
+      background:#020617;
+      color:#38bdf8;
+      border:1px solid rgba(56,189,248,.35);
+    }
+
+    .btn-back:hover{
+      box-shadow:0 0 24px rgba(56,189,248,.4);
+    }
+
+    .btn-next{
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      box-shadow:0 0 36px rgba(56,189,248,.55);
+    }
+
+    .btn-next:hover{
+      transform:translateY(-2px);
+      box-shadow:0 0 60px rgba(56,189,248,.85);
+    }
+
+    /* FOOTER */
+    footer{
+      margin-top:70px;
+      text-align:center;
+      font-size:13px;
+      opacity:.6;
+    }
+  </style>
 </head>
-<body>
 
-<!-- PROGRESS -->
+<body>
+  <!-- PROGRESS FUNNEL -->
 <div class="progress-wrap">
   <div class="progress-step" data-page="hook.html">1<br><span>Hook</span></div>
   <div class="progress-line"></div>
@@ -214,106 +217,68 @@ footer{
   <div class="progress-line"></div>
   <div class="progress-step" data-page="cta.html">4<br><span>CTA</span></div>
 </div>
+  <div class="container">
 
-<div class="container">
-  <!-- HEADER -->
-  <div class="header">
-    <div class="logo">AG</div>
-    <div>
-      <h1>CTA Tool</h1>
-      <div class="subtitle">Step 4 — Penutup & CTA</div>
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">AG</div>
+      <div>
+        <h1>CTA Tool</h1>
+        <div class="subtitle">Step 4 — Call To Action</div>
+      </div>
     </div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+      <h2>🚀 Buat CTA yang Powerful</h2>
+
+      <label>Aksi Utama yang Ingin Dicapai</label>
+      <textarea placeholder="Contoh: Beli sekarang, Daftar gratis, Dapatkan diskon"></textarea>
+      <div class="hint">Apa yang ingin audiens lakukan setelah melihat konten?</div>
+
+      <label>Alasan Audiens Harus Bertindak</label>
+      <textarea placeholder="Contoh: Stok terbatas, Bonus eksklusif, Solusi cepat untuk masalah mereka"></textarea>
+      <div class="hint">Berikan urgensi atau manfaat yang jelas.</div>
+
+      <label>Pesan Pendukung / Testimoni</label>
+      <textarea placeholder="Contoh: ‘Sudah dicoba ribuan orang’, ‘100% terbukti efektif’"></textarea>
+      <div class="hint">Bantu audiens percaya dan yakin untuk klik.</div>
+
+      <!-- CTA BUTTONS -->
+      <div class="cta-wrap">
+        <a href="solution.html" class="btn btn-back">⬅ Kembali ke Solution</a>
+        <a href="#" class="btn btn-next" onclick="alert('CTA Tersimpan!')">Simpan & Lanjut ➜</a>
+        <a href="hook.html" class="btn btn-back">🏠 Kembali ke Awal</a>
+      </div>
+    </div>
+
+    <footer>
+      <div><strong>AffiliGen AI</strong></div>
+      <div>Hook → Problem → Solution → CTA</div>
+    </footer>
+
   </div>
 
-  <!-- MAIN CARD -->
-  <div class="card">
-    <!-- Upload Images -->
-    <label>Upload Gambar Produk (max 5)</label>
-    <input type="file" id="produkImg" accept="image/*" multiple>
-    <div id="produkPreview" class="preview"></div>
+  <script>
+  const steps = document.querySelectorAll('.progress-step');
+  const currentPage = location.pathname.split('/').pop();
 
-    <label>Upload Gambar Model (max 5)</label>
-    <input type="file" id="modelImg" accept="image/*" multiple>
-    <div id="modelPreview" class="preview"></div>
+  let activeIndex = 0;
 
-    <h2>✨ CTA & Penutup Konten</h2>
-
-    <label>Pesan CTA Utama</label>
-    <textarea placeholder="Contoh: Klik sekarang untuk mendapatkan promo spesial!"></textarea>
-    <div class="hint">Buat CTA menarik & natural.</div>
-
-    <label>Urgensi / Penawaran Khusus</label>
-    <textarea placeholder="Contoh: Stok terbatas, jangan sampai kehabisan"></textarea>
-    <div class="hint">Buat audiens merasa tertarik tanpa paksaan.</div>
-
-    <label>Call-to-Action Visual / Text</label>
-    <textarea placeholder="Contoh: Tombol beli, swipe up, link di bio"></textarea>
-    <div class="hint">Instruksi aksi yang jelas & mudah diikuti.</div>
-    <!-- Tombol menuju Final Prompt Output -->
-<div style="margin-top:20px; text-align:center;">
-  <button onclick="saveInputAndGoNext('output.html')"
-          style="padding:14px 28px; border:none; border-radius:14px; background:#38bdf8; color:#020617; font-weight:bold; cursor:pointer;">
-    ➡️ Lihat Final Prompt
-  </button>
-</div>
-    <!-- CTA Navigation -->
-    <div class="cta-wrap">
-      <a href="solution.html" class="btn btn-back">⬅ Kembali ke Solution</a>
-      <a href="#" class="btn btn-next" onclick="alert('Fungsi selesai / export prompt bisa ditambahkan')">Selesai ➜</a>
-    </div>
-  </div>
-
-  <footer>
-    <div><strong>AffiliGen AI</strong></div>
-    <div>Hook → Problem → Solution → CTA</div>
-  </footer>
-</div>
-
-<script>
-// ====== PROGRESS STEP ======
-const steps = document.querySelectorAll('.progress-step');
-const currentPage = location.pathname.split('/').pop();
-let activeIndex = 0;
-steps.forEach((step,index)=>{if(step.dataset.page===currentPage){activeIndex=index;}});
-steps.forEach((step,index)=>{
-  if(index<activeIndex) step.classList.add('done');
-  if(index===activeIndex) step.classList.add('active');
-});
-
-// ====== PREVIEW GAMBAR ======
-function previewImages(input,targetId){
-  const preview = document.getElementById(targetId);
-  preview.innerHTML='';
-  Array.from(input.files).slice(0,5).forEach(file=>{
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
-    preview.appendChild(img);
+  steps.forEach((step, index) => {
+    if(step.dataset.page === currentPage){
+      activeIndex = index;
+    }
   });
-  if(input.files.length>5) alert("Maksimal 5 gambar!");
-}
-document.getElementById('produkImg').addEventListener('change',function(){previewImages(this,'produkPreview');});
-document.getElementById('modelImg').addEventListener('change',function(){previewImages(this,'modelPreview');});
-<script>
-// Simpan input ke localStorage saat tombol lanjut diklik
-function saveInputAndGoNext(nextPage){
-  // Ambil semua input yang relevan
-  const hook = document.getElementById('hookInput') ? document.getElementById('hookInput').value : '';
-  const problem = document.getElementById('problemInput') ? document.getElementById('problemInput').value : '';
-  const solution = document.getElementById('solutionInput') ? document.getElementById('solutionInput').value : '';
-  const cta = document.getElementById('ctaInput') ? document.getElementById('ctaInput').value : '';
-  const ai = document.getElementById('aiEngine') ? document.getElementById('aiEngine').value : '';
 
-  // Simpan ke localStorage
-  localStorage.setItem('hook', hook);
-  localStorage.setItem('problem', problem);
-  localStorage.setItem('solution', solution);
-  localStorage.setItem('cta', cta);
-  localStorage.setItem('aiEngine', ai);
-
-  // Pindah halaman
-  window.location.href = nextPage;
-}
-</script>
-</script>
+  steps.forEach((step, index) => {
+    if(index < activeIndex){
+      step.classList.add('done');
+    }
+    if(index === activeIndex){
+      step.classList.add('active');
+    }
+  });
+  </script>
 </body>
-                                                                                     </html>
+        </html>
