@@ -1,199 +1,296 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AffiliGen AI</title>  <style>
-    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
-    .container{max-width:900px;margin:auto;padding:24px}
-    .hero{text-align:center;margin-bottom:40px}
-    .hero h1{font-size:38px;color:#38bdf8}
-    .hero p{opacity:.85}
-    .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
-    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
-    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
-    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
-    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
-    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
-    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
-    .preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .preview img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3)}
-    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
-  </style></head>
+  <title>AffiliGen AI 🇮🇩 — Affiliate Content Engine</title>
+
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:radial-gradient(circle at top,#0f172a,#020617 60%);
+      color:#e5e7eb;
+    }
+
+    a{text-decoration:none}
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:28px 18px 80px;
+    }
+
+    /* HERO */
+    .hero{
+      text-align:center;
+      padding:80px 12px 60px;
+    }
+
+    .logo{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .logo-box{
+      width:52px;
+      height:52px;
+      border-radius:14px;
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 30px rgba(56,189,248,.6);
+    }
+
+    h1{
+      font-size:44px;
+      margin:0;
+      color:#38bdf8;
+      letter-spacing:.5px;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:22px auto 0;
+      font-size:18px;
+      line-height:1.6;
+      opacity:.9;
+    }
+
+    .badge-row{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:26px;
+    }
+
+    .badge{
+      padding:6px 14px;
+      border-radius:999px;
+      font-size:13px;
+      background:rgba(56,189,248,.12);
+      border:1px solid rgba(56,189,248,.35);
+      color:#e5e7eb;
+    }
+
+    /* CTA */
+    .cta-wrap{
+      margin-top:42px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .cta-hook{
+      padding:18px 36px;
+      font-size:17px;
+      font-weight:800;
+      border-radius:18px;
+      border:none;
+      cursor:pointer;
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      box-shadow:0 0 36px rgba(56,189,248,.55);
+      transition:.25s ease;
+    }
+
+    .cta-hook:hover{
+      transform:translateY(-3px);
+      box-shadow:0 0 60px rgba(56,189,248,.85);
+    }
+
+    /* SECTION */
+    .section{
+      margin-top:90px;
+    }
+
+    .section h2{
+      font-size:34px;
+      color:#38bdf8;
+      margin-bottom:18px;
+      text-align:center;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:22px;
+      margin-top:34px;
+    }
+
+    .card{
+      background:rgba(2,6,23,.92);
+      border:1px solid rgba(56,189,248,.18);
+      border-radius:20px;
+      padding:26px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
+
+    .card h3{
+      margin-top:0;
+      color:#7dd3fc;
+      font-size:18px;
+    }
+
+    .card p{
+      font-size:15px;
+      line-height:1.6;
+      opacity:.9;
+    }
+
+    /* FLOW */
+    .flow{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;
+      margin-top:36px;
+    }
+
+    .step{
+      background:linear-gradient(180deg,rgba(2,6,23,.95),rgba(2,6,23,.85));
+      border:1px solid rgba(56,189,248,.2);
+      border-radius:18px;
+      padding:22px;
+    }
+
+    .step span{
+      font-size:13px;
+      opacity:.7;
+    }
+
+    .step h4{
+      margin:8px 0 10px;
+      color:#38bdf8;
+    }
+
+    /* FOOTER */
+    footer{
+      margin-top:100px;
+      text-align:center;
+      font-size:13px;
+      opacity:.6;
+    }
+  </style>
+</head>
+
 <body>
-<div class="container"><section class="hero">
-  <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:10px">
-    <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#38bdf8,#22d3ee);display:flex;align-items:center;justify-content:center;color:#020617;font-weight:bold">AG</div>
-    <h1 style="margin:0">AffiliGen AI 🇮🇩</h1>
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="logo">
+        <div class="logo-box">AG</div>
+        <h1>AffiliGen AI 🇮🇩</h1>
+      </div>
+
+      <p>
+        <strong>Bukan sekadar AI Prompt Generator.</strong><br>
+        Ini <b>Affiliate Content Engine</b> — mesin berpikir untuk creator
+        yang ingin kontennya terlihat <b>natural, profesional</b>,
+        dan <b>konversi tinggi</b>.
+      </p>
+
+      <div class="badge-row">
+        <div class="badge">⚡ Funnel-based Prompt</div>
+        <div class="badge">🖼️ Image + Video AI</div>
+        <div class="badge">🎯 Natural Affiliate</div>
+        <div class="badge">🔥 Viral-Ready</div>
+      </div>
+
+      <!-- CTA TO HOOK TOOL -->
+      <div class="cta-wrap">
+        <a href="hook.html">
+          <button class="cta-hook">🎯 Mulai dari Hook</button>
+        </a>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section">
+      <h2>Masalah Creator Affiliate Saat Ini</h2>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Prompt AI Terlalu Generik</h3>
+          <p>
+            Hasil konten mirip semua, tidak punya identitas,
+            dan sulit membangun trust audience.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Konten Terlihat “AI Banget”</h3>
+          <p>
+            Tidak natural, tidak relatable,
+            dan sering gagal menarik emosi di 3 detik pertama.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Creator Kehilangan Arah Funnel</h3>
+          <p>
+            Hook, problem, solution, CTA tercampur.
+            Akhirnya konten tidak fokus dan tidak konversi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOLUTION -->
+    <section class="section">
+      <h2>AffiliGen AI Mengubah Cara Kamu Membuat Konten</h2>
+
+      <div class="flow">
+        <div class="step">
+          <span>STEP 1</span>
+          <h4>Mulai dari Hook</h4>
+          <p>
+            Bangun perhatian dulu. Satu ide, satu fokus,
+            satu emosi kuat.
+          </p>
+        </div>
+
+        <div class="step">
+          <span>STEP 2</span>
+          <h4>Problem & Pain Point</h4>
+          <p>
+            Konten terasa “gue banget”.
+            Relatable sebelum jualan.
+          </p>
+        </div>
+
+        <div class="step">
+          <span>STEP 3</span>
+          <h4>Solution & Transformasi</h4>
+          <p>
+            Produk masuk natural,
+            bukan dipaksakan.
+          </p>
+        </div>
+
+        <div class="step">
+          <span>STEP 4</span>
+          <h4>CTA yang Manusiawi</h4>
+          <p>
+            Jualan tanpa terasa jualan.
+            Trust → klik → konversi.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div><strong>AffiliGen AI</strong></div>
+      <div>AI Prompt System for Affiliate Creators</div>
+      <div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
+    </footer>
+
   </div>
-  <p><strong>Affiliate Content Engine</strong><br>
-  Generate high-converting <b>Image + Video AI Prompts</b><br>
-  Built for TikTok & Shopee Affiliates</p>
-  <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-    <span style="padding:6px 12px;border-radius:999px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.35);font-size:12px">⚡ Funnel-based Prompt</span>
-    <span style="padding:6px 12px;border-radius:999px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.35);font-size:12px">🎬 Image → Video Ready</span>
-    <span style="padding:6px 12px;border-radius:999px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.35);font-size:12px">🔥 Viral Affiliate Mode</span>
-  </div>
-</section><div class="card">
-  <label>1️⃣ Referensi Produk</label>
-  <textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea>
-  <input type="file" id="produkImg" accept="image/*" multiple />
-  <div id="produkPreview" class="preview"></div><label>2️⃣ Referensi Model</label>
-
-  <textarea id="model" placeholder="Wanita Indonesia 20-an, natural"></textarea>  <input type="file" id="modelImg" accept="image/*" multiple />
-  <div id="modelPreview" class="preview"></div><label>3️⃣ Referensi Gerakan</label>
-
-  <textarea id="gerakan" placeholder="Unboxing, close-up, before-after"></textarea><label>4️⃣ Gaya Visual</label> <input id="gaya" placeholder="cinematic / clean / dramatic" />
-
-<label>5️⃣ Platform Preset</label> <select id="platform"> <option value="tiktok">TikTok Shop</option> <option value="shopee">Shopee Affiliate</option> </select>
-
-<label>6️⃣ AI Engine</label> <select id="ai"> <option>Grok</option> <option>Midjourney</option> <option>Stable Diffusion</option> <option>Runway</option> <option>Pika</option> </select>
-
-<label>7️⃣ Fokus Funnel</label> <select id="fokus"> <option value="hook">Hook – Stop Scroll</option> <option value="problem">Problem – Pain Point</option> <option value="solution">Solution – Transformasi</option> <option value="cta">CTA – Jualan</option> </select>
-
-<label>8️⃣ Preset Niche Affiliate</label> <select id="preset"> <option value="general">General Affiliate</option> <option value="beauty">Beauty / Skincare</option> <option value="fashion">Fashion</option> <option value="gadget">Gadget / Tech</option> <option value="food">Food / Minuman</option> <option value="health">Health / Fitness</option> </select>
-
-<label>🔥 Mode Prompt</label> <select id="mode"> <option value="normal">Normal Mode</option> <option value="viral">🔥 Affiliate Viral Mode</option> </select>
-
-<button onclick="generate()">🚀 Generate Prompt</button>
-
-</div><div class="card">
-  <h3>🕘 Prompt History</h3>
-  <div id="history" class="output">Belum ada history.</div>
-  <button class="copyBtn" onclick="clearHistory()">🗑️ Hapus History</button>
-</div><div class="card">
-  <h3>🖼️ Image Prompt</h3>
-  <div id="imageOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
-  <div id="videoOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
-  <button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
-  <button class="copyBtn" onclick="exportPrompt('md')">⬇️ Download Prompt (.md)</button>
-</div><footer>
-  <div style="margin-bottom:6px;font-weight:bold">AffiliGen AI</div>
-  <div>AI Prompt System for Affiliate Creators</div>
-  <div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
-</footer>
-</div><script>
-function previewImages(input, target){
-  const preview = document.getElementById(target);
-  preview.innerHTML='';
-  Array.from(input.files).slice(0,5).forEach(file=>{
-    const img=document.createElement('img');
-    img.src=URL.createObjectURL(file);
-    preview.appendChild(img);
-  });
-}
-produkImg.onchange=()=>previewImages(produkImg,'produkPreview');
-modelImg.onchange=()=>previewImages(modelImg,'modelPreview');
-
-function copyText(id){
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  alert('Prompt berhasil disalin ✅');
-}
-
-function generate(){
-  const focusMap={
-    hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Stop scroll! Ini alasannya…','Gue kira ini HOAX 😳','Ini bikin hidup gue lebih gampang…']},
-    problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Capek coba banyak cara tapi gagal?','Masalah ini sering diremehin…','Ini yang bikin orang frustrasi…']},
-    solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Akhirnya ketemu solusinya…','Cuma pakai ini hasilnya kerasa','Cara paling simpel yang pernah gue coba']},
-    cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link di keranjang sekarang!','Jangan kehabisan, serius','Klik sekarang sebelum nyesel']}
-  };
-
-  const aiStyle={
-    Grok:'Natural language, cinematic realism, descriptive',
-    Midjourney:'Ultra-detailed, cinematic lighting, sharp focus, 8k',
-    'Stable Diffusion':'Highly detailed, realistic texture, balanced composition',
-    Runway:'Smooth cinematic motion, realistic transition',
-    Pika:'Dynamic camera, fast social motion'
-  };
-
-  const nichePreset={
-    general:'Balanced commercial look, broad appeal',
-    beauty:'Clean skin tone, soft lighting, aesthetic beauty shot',
-    fashion:'Stylish pose, confident expression, editorial look',
-    gadget:'Sharp product focus, tech lighting, modern vibe',
-    food:'Appetizing close-up, warm lighting, fresh texture',
-    health:'Energetic body language, healthy lifestyle mood'
-  };
-
-  const f=focusMap[fokus.value];
-  const platformTone=platform.value==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
-  const modeTone=mode.value==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
-  const viralLine = mode.value==='viral' ? `Suggested Viral Line: "${f.copy[Math.floor(Math.random()*f.copy.length)]}"
-
-` : '';
-
-  imageOut.innerText = `${f.t}
-IMAGE PROMPT
-
-${viralLine}Product: ${produk.value}
-Model: ${model.value}
-Use attached images as reference (keep identity consistent)
-Visual Focus: ${f.v}
-Style: ${gaya.value}
-Mood: ${platformTone} | ${modeTone}
-AI Style: ${aiStyle[ai.value]}
-Niche Preset: ${nichePreset[preset.value]}`;
-
-  saveHistory(imageOut.innerText, videoOut.innerText);
-
-  videoOut.innerText = `${f.t}
-IMAGE → VIDEO PROMPT
-
-Use generated image + references
-Motion: ${gerakan.value}
-Visual Focus: ${f.v}
-Style: ${gaya.value}
-Mood: ${platformTone} | ${modeTone}
-AI Style: ${aiStyle[ai.value]}
-Niche Preset: ${nichePreset[preset.value]}
-Format: Vertical 9:16
-Duration: 5–7s
-Goal: High CTR Affiliate Video`;
-}
-
-function saveHistory(image, video){
-  const data = JSON.parse(localStorage.getItem('affiligen_history') || '[]');
-  data.unshift({time:new Date().toLocaleString(), image, video});
-  localStorage.setItem('affiligen_history', JSON.stringify(data.slice(0,10)));
-  renderHistory();
-}
-
-function renderHistory(){
-  const box = document.getElementById('history');
-  const data = JSON.parse(localStorage.getItem('affiligen_history') || '[]');
-  if(data.length===0){ box.innerText='Belum ada history.'; return; }
-  box.innerHTML = data.map((h,i)=>`#${i+1} (${h.time})
-IMAGE:
-${h.image}
-
-VIDEO:
-${h.video}`).join('
-
-----------------------
-
-');
-}
-
-function clearHistory(){
-  localStorage.removeItem('affiligen_history');
-  renderHistory();
-}
-
-window.onload = renderHistory;
-
-function exportPrompt(type='txt'){
-  const content = `=== IMAGE PROMPT ===
-${imageOut.innerText}
-
-=== VIDEO PROMPT ===
-${videoOut.innerText}`;
-  const mime = type==='md' ? 'text/markdown' : 'text/plain';
-  const blob = new Blob([content], {type:mime});
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = `AffiliGen_Prompt.${type}`;
-  link.click();
-}
-</script></body>
-        </html>
+</body>
+  </html>
