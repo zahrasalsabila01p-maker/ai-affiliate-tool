@@ -1,112 +1,126 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CTA Tool | AffiliGen AI 🇮🇩</title>
-
-  <style>
-    body{
-      margin:0;font-family:Arial,sans-serif;
-      background:linear-gradient(135deg,#020617,#0f172a);
-      color:#e5e7eb;padding:24px;
-    }
-    h1{color:#38bdf8;text-align:center;margin-bottom:24px}
-    .card{background:rgba(2,6,23,.95);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
-    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
-    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
-    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
-    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
-    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
-    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
-    .preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .preview img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3)}
-    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AffiliGen AI — CTA Tool</title>
+<style>
+body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top,#0f172a,#020617 60%);color:#e5e7eb}
+.container{max-width:900px;margin:auto;padding:28px 18px 80px;}
+h1{color:#38bdf8;text-align:center;margin-bottom:20px}
+.card{background:rgba(2,6,23,.92);border:1px solid rgba(56,189,248,.18);border-radius:20px;padding:26px;margin-bottom:22px;box-shadow:0 18px 45px rgba(0,0,0,.45);}
+label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
+textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
+button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
+button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
+.output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
+.copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
+.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.preview img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3);box-shadow:0 0 6px rgba(56,189,248,.5)}
+footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
+</style>
 </head>
 <body>
+<div class="container">
+<h1>🎯 CTA Tool — AffiliGen AI</h1>
 
-  <h1>CTA Tool | AffiliGen AI 🇮🇩</h1>
+<div class="card">
+<label>1️⃣ Referensi Produk</label>
+<textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea>
+<input type="file" id="produkImg" accept="image/*" multiple>
+<div id="produkPreview" class="preview"></div>
 
-  <div class="card">
-    <label>Produk (deskripsi)</label>
-    <textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea>
-    <label>Upload Gambar Produk (max 5)</label>
-    <input type="file" id="produkImg" accept="image/*" multiple>
-    <div id="produkPreview" class="preview"></div>
+<label>2️⃣ Referensi Model</label>
+<textarea id="model" placeholder="Wanita Indonesia 20-an, natural"></textarea>
+<input type="file" id="modelImg" accept="image/*" multiple>
+<div id="modelPreview" class="preview"></div>
 
-    <label>Model (deskripsi)</label>
-    <textarea id="model" placeholder="Contoh: Wanita Indonesia 20-an, natural"></textarea>
-    <label>Upload Gambar Model (max 5)</label>
-    <input type="file" id="modelImg" accept="image/*" multiple>
-    <div id="modelPreview" class="preview"></div>
+<label>3️⃣ Referensi Gerakan</label>
+<textarea id="gerakan" placeholder="Unboxing, close-up, before-after"></textarea>
 
-    <label>Gaya Visual</label>
-    <input id="gaya" placeholder="cinematic / clean / dramatic">
-    <label>Gerakan</label>
-    <textarea id="gerakan" placeholder="Contoh: close-up, slow motion"></textarea>
+<label>4️⃣ Gaya Visual</label>
+<input id="gaya" placeholder="cinematic / clean / dramatic">
 
-    <label>Platform Preset</label>
-    <select id="platform">
-      <option value="tiktok">TikTok Shop</option>
-      <option value="shopee">Shopee Affiliate</option>
-    </select>
+<label>5️⃣ Platform Preset</label>
+<select id="platform">
+  <option value="tiktok">TikTok Shop</option>
+  <option value="shopee">Shopee Affiliate</option>
+</select>
 
-    <label>AI Engine</label>
-    <select id="ai">
-      <option>Grok</option>
-      <option>Midjourney</option>
-      <option>Stable Diffusion</option>
-      <option>Runway</option>
-      <option>Pika</option>
-    </select>
+<label>6️⃣ AI Engine</label>
+<select id="ai">
+  <option>Grok</option>
+  <option>Midjourney</option>
+  <option>Stable Diffusion</option>
+  <option>Runway</option>
+  <option>Pika</option>
+</select>
 
-    <label>Fokus Funnel</label>
-    <select id="fokus">
-      <option value="cta">CTA – Jualan</option>
-    </select>
+<label>7️⃣ Fokus Funnel</label>
+<select id="fokus">
+  <option value="hook">Hook – Stop Scroll</option>
+  <option value="problem">Problem – Pain Point</option>
+  <option value="solution">Solution – Transformasi</option>
+  <option value="cta" selected>CTA – Jualan</option>
+</select>
 
-    <label>Preset Niche</label>
-    <select id="preset">
-      <option value="general">General Affiliate</option>
-      <option value="beauty">Beauty / Skincare</option>
-      <option value="fashion">Fashion</option>
-      <option value="gadget">Gadget / Tech</option>
-      <option value="food">Food / Minuman</option>
-      <option value="health">Health / Fitness</option>
-    </select>
+<label>8️⃣ Preset Niche Affiliate</label>
+<select id="preset">
+  <option value="general">General Affiliate</option>
+  <option value="beauty">Beauty / Skincare</option>
+  <option value="fashion">Fashion</option>
+  <option value="gadget">Gadget / Tech</option>
+  <option value="food">Food / Minuman</option>
+  <option value="health">Health / Fitness</option>
+</select>
 
-    <label>Mode Prompt</label>
-    <select id="mode">
-      <option value="normal">Normal Mode</option>
-      <option value="viral">🔥 Affiliate Viral Mode</option>
-    </select>
+<label>🔥 Mode Prompt</label>
+<select id="mode">
+  <option value="normal">Normal Mode</option>
+  <option value="viral">🔥 Affiliate Viral Mode</option>
+</select>
 
-    <button onclick="generate()">🚀 Generate Prompt</button>
-  </div>
+<button onclick="generate()">🚀 Generate Prompt</button>
+</div>
 
-  <div class="card">
-    <h3>🖼️ Image Prompt</h3>
-    <div id="imageOut" class="output">—</div>
-    <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>
+<div class="card">
+<h3>🖼️ Image Prompt</h3>
+<div id="imageOut" class="output">—</div>
+<button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>
 
-    <h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
-    <div id="videoOut" class="output">—</div>
-    <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
-    <button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
-  </div>
+<h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
+<div id="videoOut" class="output">—</div>
+<button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
+<button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
+<button class="copyBtn" onclick="exportPrompt('md')">⬇️ Download Prompt (.md)</button>
+</div>
 
-  <footer>
-    <div style="margin-bottom:6px;font-weight:bold">AffiliGen AI</div>
-    <div>AI Prompt System for Affiliate Creators</div>
-    <div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
-  </footer>
+<footer>
+<div style="margin-bottom:6px;font-weight:bold">AffiliGen AI</div>
+<div>AI Prompt System for Affiliate Creators</div>
+<div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
+</footer>
+</div>
 
 <script>
 function copyText(id){
   navigator.clipboard.writeText(document.getElementById(id).innerText);
   alert('Prompt berhasil disalin ✅');
 }
+
+function previewImages(input, targetId){
+  const preview = document.getElementById(targetId);
+  preview.innerHTML='';
+  Array.from(input.files).slice(0,5).forEach(file=>{
+    const img = document.createElement('img');
+    img.src = URL.createObjectURL(file);
+    preview.appendChild(img);
+  });
+  if(input.files.length > 5) alert("Maksimal 5 gambar!");
+}
+
+document.getElementById('produkImg').addEventListener('change', function(){previewImages(this,'produkPreview');});
+document.getElementById('modelImg').addEventListener('change', function(){previewImages(this,'modelPreview');});
 
 function generate(){
   const produkText = document.getElementById('produk').value;
@@ -120,6 +134,9 @@ function generate(){
   const mode = document.getElementById('mode').value;
 
   const focusMap={
+    hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Stop scroll! Ini alasannya…','Gue kira ini HOAX 😳','Ini bikin hidup gue lebih gampang…']},
+    problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Capek coba banyak cara tapi gagal?','Masalah ini sering diremehin…','Ini yang bikin orang frustrasi…']},
+    solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Akhirnya ketemu solusinya…','Cuma pakai ini hasilnya kerasa','Cara paling simpel yang pernah gue coba']},
     cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link di keranjang sekarang!','Jangan kehabisan, serius','Klik sekarang sebelum nyesel']}
   };
 
@@ -155,6 +172,7 @@ ${viralLine}Produk: ${produkText}
 Gambar Produk: ${produkImgs}
 Model: ${modelText}
 Gambar Model: ${modelImgs}
+Use attached images as reference
 Visual Focus: ${f.v}
 Style: ${gaya}
 Mood: ${platformTone} | ${modeTone}
@@ -176,7 +194,7 @@ Duration: 5–7s
 Goal: High CTR Affiliate Video`;
 }
 
-function exportPrompt(){
+function exportPrompt(type='txt'){
   const content = `=== IMAGE PROMPT ===
 ${document.getElementById('imageOut').innerText}
 
@@ -185,25 +203,9 @@ ${document.getElementById('videoOut').innerText}`;
   const blob = new Blob([content], {type:'text/plain'});
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = `CTA_Prompt.txt`;
+  link.download = `AffiliGen_Prompt.${type}`;
   link.click();
 }
-
-// Preview gambar
-function previewImages(input, targetId){
-  const preview = document.getElementById(targetId);
-  preview.innerHTML='';
-  Array.from(input.files).slice(0,5).forEach(file=>{
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
-    preview.appendChild(img);
-  });
-  if(input.files.length > 5) alert("Maksimal 5 gambar!");
-}
-
-document.getElementById('produkImg').addEventListener('change', function(){previewImages(this,'produkPreview');});
-document.getElementById('modelImg').addEventListener('change', function(){previewImages(this,'modelPreview');});
 </script>
-
 </body>
 </html>
