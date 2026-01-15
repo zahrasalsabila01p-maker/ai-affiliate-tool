@@ -57,6 +57,10 @@
 <button onclick="generate()">🚀 Generate Prompt</button>
 
 </div><div class="card">
+  <h3>🕘 Prompt History</h3>
+  <div id="history" class="output">Belum ada history.</div>
+  <button class="copyBtn" onclick="clearHistory()">🗑️ Hapus History</button>
+</div><div class="card">
   <h3>🖼️ Image Prompt</h3>
   <div id="imageOut" class="output">—</div>
   <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
@@ -131,6 +135,8 @@ Mood: ${platformTone} | ${modeTone}
 AI Style: ${aiStyle[ai.value]}
 Niche Preset: ${nichePreset[preset.value]}`;
 
+  saveHistory(imageOut.innerText, videoOut.innerText);
+
   videoOut.innerText = `${f.t}
 IMAGE → VIDEO PROMPT
 
@@ -146,6 +152,36 @@ Duration: 5–7s
 Goal: High CTR Affiliate Video`;
 }
 
+function saveHistory(image, video){
+  const data = JSON.parse(localStorage.getItem('affiligen_history') || '[]');
+  data.unshift({time:new Date().toLocaleString(), image, video});
+  localStorage.setItem('affiligen_history', JSON.stringify(data.slice(0,10)));
+  renderHistory();
+}
+
+function renderHistory(){
+  const box = document.getElementById('history');
+  const data = JSON.parse(localStorage.getItem('affiligen_history') || '[]');
+  if(data.length===0){ box.innerText='Belum ada history.'; return; }
+  box.innerHTML = data.map((h,i)=>`#${i+1} (${h.time})
+IMAGE:
+${h.image}
+
+VIDEO:
+${h.video}`).join('
+
+----------------------
+
+');
+}
+
+function clearHistory(){
+  localStorage.removeItem('affiligen_history');
+  renderHistory();
+}
+
+window.onload = renderHistory;
+
 function exportPrompt(type='txt'){
   const content = `=== IMAGE PROMPT ===
 ${imageOut.innerText}
@@ -160,4 +196,4 @@ ${videoOut.innerText}`;
   link.click();
 }
 </script></body>
-</html>
+        </html>
