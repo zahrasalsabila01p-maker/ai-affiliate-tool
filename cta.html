@@ -3,258 +3,306 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AffiliGen AI — CTA Tool</title>
+<title>CTA Tool — AffiliGen AI</title>
 <style>
-body{margin:0;font-family:Inter,Arial,sans-serif;background:radial-gradient(circle at top,#0f172a,#020617 60%);color:#e5e7eb}
-.container{max-width:900px;margin:auto;padding:28px 18px 80px;}
-h1{color:#38bdf8;text-align:center;margin-bottom:20px}
-.card{background:rgba(2,6,23,.92);border:1px solid rgba(56,189,248,.18);border-radius:20px;padding:26px;margin-bottom:22px;box-shadow:0 18px 45px rgba(0,0,0,.45);}
-label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
-textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
-button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
-button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
-.output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
-.copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
-.preview{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.preview img{width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid rgba(56,189,248,.3);box-shadow:0 0 6px rgba(56,189,248,.5)}
-.nav-step{display:flex;justify-content:space-between;margin-top:16px}
-.nav-step button{width:48%;background:linear-gradient(135deg,#22d3ee,#38bdf8);color:#020617}
-footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
+*{box-sizing:border-box}
+/* === CYBERPUNK PROGRESS INDICATOR === */
+.progress-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:30px auto 40px;
+  max-width:700px;
+}
+
+.progress-step{
+  width:64px;
+  height:64px;
+  border-radius:16px;
+  background:#020617;
+  border:1px solid rgba(56,189,248,.35);
+  color:#64748b;
+  font-size:16px;
+  font-weight:900;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:.3s;
+}
+
+.progress-step span{
+  font-size:11px;
+  font-weight:500;
+  margin-top:3px;
+}
+
+.progress-line{
+  width:36px;
+  height:3px;
+  background:rgba(56,189,248,.25);
+}
+
+/* ACTIVE */
+.progress-step.active{
+  background:linear-gradient(135deg,#38bdf8,#22d3ee);
+  color:#020617;
+  box-shadow:0 0 25px rgba(56,189,248,.8);
+  border:none;
+}
+
+/* DONE */
+.progress-step.done{
+  color:#38bdf8;
+  border-color:#38bdf8;
+}
+
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:radial-gradient(circle at top,#0f172a,#020617 65%);
+  color:#e5e7eb;
+}
+
+a{text-decoration:none}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 18px 80px;
+}
+
+/* HEADER */
+.header{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:30px;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#38bdf8,#22d3ee);
+  color:#020617;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 0 30px rgba(56,189,248,.6);
+}
+
+h1{
+  margin:0;
+  font-size:32px;
+  color:#38bdf8;
+}
+
+.subtitle{
+  opacity:.85;
+  margin-top:6px;
+}
+
+/* CARD */
+.card{
+  background:rgba(2,6,23,.92);
+  border:1px solid rgba(56,189,248,.18);
+  border-radius:22px;
+  padding:28px;
+  margin-top:36px;
+  box-shadow:0 18px 45px rgba(0,0,0,.45);
+}
+
+.card h2{
+  margin-top:0;
+  color:#7dd3fc;
+  font-size:22px;
+}
+
+label{
+  display:block;
+  margin-top:22px;
+  margin-bottom:6px;
+  font-size:14px;
+  font-weight:600;
+  opacity:.9;
+}
+
+textarea,input{
+  width:100%;
+  min-height:90px;
+  resize:vertical;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(56,189,248,.25);
+  background:#020617;
+  color:#e5e7eb;
+  font-size:14px;
+}
+
+textarea:focus,input:focus{
+  outline:none;
+  border-color:#38bdf8;
+  box-shadow:0 0 18px rgba(56,189,248,.35);
+}
+
+.hint{
+  font-size:13px;
+  opacity:.65;
+  margin-top:6px;
+}
+
+/* CTA */
+.cta-wrap{
+  display:flex;
+  justify-content:space-between;
+  gap:14px;
+  margin-top:36px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  flex:1;
+  padding:16px 22px;
+  font-size:15px;
+  font-weight:800;
+  border-radius:18px;
+  border:none;
+  cursor:pointer;
+  text-align:center;
+  transition:.25s ease;
+}
+
+.btn-back{
+  background:#020617;
+  color:#38bdf8;
+  border:1px solid rgba(56,189,248,.35);
+}
+
+.btn-back:hover{
+  box-shadow:0 0 24px rgba(56,189,248,.4);
+}
+
+.btn-next{
+  background:linear-gradient(135deg,#38bdf8,#22d3ee);
+  color:#020617;
+  box-shadow:0 0 36px rgba(56,189,248,.55);
+}
+
+.btn-next:hover{
+  transform:translateY(-2px);
+  box-shadow:0 0 60px rgba(56,189,248,.85);
+}
+
+/* PREVIEW IMAGE */
+.preview{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.preview img{
+  width:70px;
+  height:70px;
+  object-fit:cover;
+  border-radius:10px;
+  border:1px solid rgba(56,189,248,.3);
+  box-shadow:0 0 6px rgba(56,189,248,.5);
+}
+
+/* FOOTER */
+footer{
+  margin-top:70px;
+  text-align:center;
+  font-size:13px;
+  opacity:.6;
+}
 </style>
 </head>
 <body>
+
+<!-- PROGRESS FUNNEL -->
+<div class="progress-wrap">
+  <div class="progress-step" data-page="hook.html">1<br><span>Hook</span></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" data-page="problem.html">2<br><span>Problem</span></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" data-page="solution.html">3<br><span>Solution</span></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" data-page="cta.html">4<br><span>CTA</span></div>
+</div>
+
 <div class="container">
-<h1>🎯 CTA Tool — AffiliGen AI</h1>
 
-<div class="card">
-<label>1️⃣ Referensi Produk</label>
-<textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea>
-<input type="file" id="produkImg" accept="image/*" multiple>
-<div id="produkPreview" class="preview"></div>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">AG</div>
+    <div>
+      <h1>CTA Tool</h1>
+      <div class="subtitle">Step 4 — CTA / Selling Moment</div>
+    </div>
+  </div>
 
-<label>2️⃣ Referensi Model</label>
-<textarea id="model" placeholder="Wanita Indonesia 20-an, natural"></textarea>
-<input type="file" id="modelImg" accept="image/*" multiple>
-<div id="modelPreview" class="preview"></div>
+  <!-- MAIN CARD -->
+  <div class="card">
+    <!-- 1️⃣ Upload Gambar Produk -->
+    <label>Upload Gambar Produk (max 5)</label>
+    <input type="file" id="produkImg" accept="image/*" multiple>
+    <div id="produkPreview" class="preview"></div>
 
-<label>3️⃣ Referensi Gerakan</label>
-<textarea id="gerakan" placeholder="Unboxing, close-up, before-after"></textarea>
+    <!-- 2️⃣ Upload Gambar Model -->
+    <label>Upload Gambar Model (max 5)</label>
+    <input type="file" id="modelImg" accept="image/*" multiple>
+    <div id="modelPreview" class="preview"></div>
 
-<label>4️⃣ Gaya Visual</label>
-<input id="gaya" placeholder="cinematic / clean / dramatic">
+    <label>Call to Action Utama</label>
+    <textarea placeholder="Contoh: Klik sekarang sebelum kehabisan!"></textarea>
+    <div class="hint">Gunakan CTA yang natural dan menarik, jangan memaksa.</div>
 
-<label>5️⃣ Platform Preset</label>
-<select id="platform">
-  <option value="tiktok">TikTok Shop</option>
-  <option value="shopee">Shopee Affiliate</option>
-</select>
+    <label>Pesan Tambahan / Alasan Membeli</label>
+    <textarea placeholder="Contoh: Produk terbukti aman dan efektif"></textarea>
+    <div class="hint">Bangun trust sebelum CTA.</div>
 
-<label>6️⃣ AI Engine</label>
-<select id="ai">
-  <option>Grok</option>
-  <option>Midjourney</option>
-  <option>Stable Diffusion</option>
-  <option>Runway</option>
-  <option>Pika</option>
-</select>
+    <label>Format / Penempatan CTA</label>
+    <textarea placeholder="Contoh: Akhiri video dengan close-up produk + tombol link"></textarea>
+    <div class="hint">Visual & kontekstual sesuai funnel.</div>
 
-<label>7️⃣ Fokus Funnel</label>
-<select id="fokus">
-  <option value="hook">Hook – Stop Scroll</option>
-  <option value="problem">Problem – Pain Point</option>
-  <option value="solution">Solution – Transformasi</option>
-  <option value="cta" selected>CTA – Jualan</option>
-</select>
+    <!-- NAVIGATION -->
+    <div class="cta-wrap">
+      <a href="solution.html" class="btn btn-back">⬅ Kembali ke Solution</a>
+      <a href="#" class="btn btn-next">Selesai ✅</a>
+    </div>
+  </div>
 
-<label>8️⃣ Preset Niche Affiliate</label>
-<select id="preset">
-  <option value="general">General Affiliate</option>
-  <option value="beauty">Beauty / Skincare</option>
-  <option value="fashion">Fashion</option>
-  <option value="gadget">Gadget / Tech</option>
-  <option value="food">Food / Minuman</option>
-  <option value="health">Health / Fitness</option>
-</select>
-
-<label>🔥 Mode Prompt</label>
-<select id="mode">
-  <option value="normal">Normal Mode</option>
-  <option value="viral">🔥 Affiliate Viral Mode</option>
-</select>
-
-<button onclick="generate()">🚀 Generate Prompt</button>
-
-<div class="nav-step">
-  <button onclick="goStep('solution.html')">← Previous Step</button>
-  <button onclick="goStep('')">Next Step →</button>
-</div>
-</div>
-
-<div class="card">
-<h3>🖼️ Image Prompt</h3>
-<div id="imageOut" class="output">—</div>
-<button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>
-
-<h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
-<div id="videoOut" class="output">—</div>
-<button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
-<button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
-<button class="copyBtn" onclick="exportPrompt('md')">⬇️ Download Prompt (.md)</button>
-</div>
-
-<footer>
-<div style="margin-bottom:6px;font-weight:bold">AffiliGen AI</div>
-<div>AI Prompt System for Affiliate Creators</div>
-<div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
-</footer>
+  <footer>
+    <div><strong>AffiliGen AI</strong></div>
+    <div>Hook → Problem → Solution → CTA</div>
+  </footer>
 </div>
 
 <script>
-// ====== COPY ======
-function copyText(id){
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  alert('Prompt berhasil disalin ✅');
-}
-
-// ====== PREVIEW GAMBAR ======
+// PREVIEW IMAGE
 function previewImages(input, targetId){
   const preview = document.getElementById(targetId);
-  preview.innerHTML='';
+  preview.innerHTML = '';
   Array.from(input.files).slice(0,5).forEach(file=>{
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(file);
+    const img=document.createElement('img');
+    img.src=URL.createObjectURL(file);
     preview.appendChild(img);
   });
-  if(input.files.length > 5) alert("Maksimal 5 gambar!");
+  if(input.files.length>5) alert("Maksimal 5 gambar!");
 }
-document.getElementById('produkImg').addEventListener('change', function(){previewImages(this,'produkPreview');saveData();});
-document.getElementById('modelImg').addEventListener('change', function(){previewImages(this,'modelPreview');saveData();});
+document.getElementById('produkImg').addEventListener('change',function(){previewImages(this,'produkPreview');});
+document.getElementById('modelImg').addEventListener('change',function(){previewImages(this,'modelPreview');});
 
-// ====== AUTO-SAVE ======
-function saveData(){
-  const data={
-    produk: document.getElementById('produk').value,
-    model: document.getElementById('model').value,
-    gerakan: document.getElementById('gerakan').value,
-    gaya: document.getElementById('gaya').value,
-    platform: document.getElementById('platform').value,
-    ai: document.getElementById('ai').value,
-    fokus: document.getElementById('fokus').value,
-    preset: document.getElementById('preset').value,
-    mode: document.getElementById('mode').value
-  };
-  localStorage.setItem('ctaData', JSON.stringify(data));
-}
-function loadData(){
-  const data = JSON.parse(localStorage.getItem('ctaData'));
-  if(!data) return;
-  document.getElementById('produk').value = data.produk;
-  document.getElementById('model').value = data.model;
-  document.getElementById('gerakan').value = data.gerakan;
-  document.getElementById('gaya').value = data.gaya;
-  document.getElementById('platform').value = data.platform;
-  document.getElementById('ai').value = data.ai;
-  document.getElementById('fokus').value = data.fokus;
-  document.getElementById('preset').value = data.preset;
-  document.getElementById('mode').value = data.mode;
-}
-['produk','model','gerakan','gaya','platform','ai','fokus','preset','mode'].forEach(id=>{
-  document.getElementById(id).addEventListener('input',saveData);
-});
-window.onload=loadData;
-
-// ====== NAVIGATION STEP ======
-function goStep(url){
-  if(!url) return;
-  window.location.href=url;
-}
-
-// ====== GENERATE PROMPT ======
-function generate(){
-  const produkText = document.getElementById('produk').value;
-  const modelText = document.getElementById('model').value;
-  const gerakan = document.getElementById('gerakan').value;
-  const gaya = document.getElementById('gaya').value;
-  const platform = document.getElementById('platform').value;
-  const ai = document.getElementById('ai').value;
-  const preset = document.getElementById('preset').value;
-  const fokus = document.getElementById('fokus').value;
-  const mode = document.getElementById('mode').value;
-
-  const focusMap={
-    hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Stop scroll! Ini alasannya…','Gue kira ini HOAX 😳','Ini bikin hidup gue lebih gampang…']},
-    problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Capek coba banyak cara tapi gagal?','Masalah ini sering diremehin…','Ini yang bikin orang frustrasi…']},
-    solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Akhirnya ketemu solusinya…','Cuma pakai ini hasilnya kerasa','Cara paling simpel yang pernah gue coba']},
-    cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link di keranjang sekarang!','Jangan kehabisan, serius','Klik sekarang sebelum nyesel']}
-  };
-
-  const aiStyle={
-    Grok:'Natural language, cinematic realism, descriptive',
-    Midjourney:'Ultra-detailed, cinematic lighting, sharp focus, 8k',
-    'Stable Diffusion':'Highly detailed, realistic texture, balanced composition',
-    Runway:'Smooth cinematic motion, realistic transition',
-    Pika:'Dynamic camera, fast social motion'
-  };
-
-  const nichePreset={
-    general:'Balanced commercial look, broad appeal',
-    beauty:'Clean skin tone, soft lighting, aesthetic beauty shot',
-    fashion:'Stylish pose, confident expression, editorial look',
-    gadget:'Sharp product focus, tech lighting, modern vibe',
-    food:'Appetizing close-up, warm lighting, fresh texture',
-    health:'Energetic body language, healthy lifestyle mood'
-  };
-
-  const f=focusMap[fokus];
-  const platformTone=platform==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
-  const modeTone=mode==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
-  const viralLine = mode==='viral' ? `Suggested Viral Line: "${f.copy[Math.floor(Math.random()*f.copy.length)]}"\n\n` : '';
-
-  const produkImgs = Array.from(document.getElementById('produkImg').files).slice(0,5).map(f=>f.name).join(', ') || 'Tidak ada gambar';
-  const modelImgs = Array.from(document.getElementById('modelImg').files).slice(0,5).map(f=>f.name).join(', ') || 'Tidak ada gambar';
-
-  document.getElementById('imageOut').innerText = `${f.t}
-IMAGE PROMPT
-
-${viralLine}Produk: ${produkText}
-Gambar Produk: ${produkImgs}
-Model: ${modelText}
-Gambar Model: ${modelImgs}
-Use attached images as reference
-Visual Focus: ${f.v}
-Style: ${gaya}
-Mood: ${platformTone} | ${modeTone}
-AI Style: ${aiStyle[ai]}
-Niche Preset: ${nichePreset[preset]}`;
-
-  document.getElementById('videoOut').innerText = `${f.t}
-IMAGE → VIDEO PROMPT
-
-Use generated image + references
-Motion: ${gerakan}
-Visual Focus: ${f.v}
-Style: ${gaya}
-Mood: ${platformTone} | ${modeTone}
-AI Style: ${aiStyle[ai]}
-Attached Images: Produk(${produkImgs}), Model(${modelImgs})
-Format: Vertical 9:16
-Duration: 5–7s
-Goal: High CTR Affiliate Video`;
-}
-
-// ====== EXPORT PROMPT ======
-function exportPrompt(type='txt'){
-  const content = `=== IMAGE PROMPT ===
-${document.getElementById('imageOut').innerText}
-
-=== VIDEO PROMPT ===
-${document.getElementById('videoOut').innerText}`;
-  const blob = new Blob([content], {type:'text/plain'});
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(blob);
-  link.download = `AffiliGen_Prompt.${type}`;
-  link.click();
-}
+// PROGRESS STEPS
+const steps = document.querySelectorAll('.progress-step');
+const currentPage = location.pathname.split('/').pop();
+let activeIndex = 0;
+steps.forEach((step,index)=>{if(step.dataset.page===currentPage) activeIndex=index;});
+steps.forEach((step,index)=>{if(index<activeIndex) step.classList.add('done'); if(index===activeIndex) step.classList.add('active');});
 </script>
 </body>
 </html>
