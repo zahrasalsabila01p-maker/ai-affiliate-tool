@@ -7,6 +7,57 @@
 
   <style>
     *{box-sizing:border-box}
+    /* === CYBERPUNK PROGRESS INDICATOR === */
+.progress-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:30px auto 40px;
+  max-width:700px;
+}
+
+.progress-step{
+  width:64px;
+  height:64px;
+  border-radius:16px;
+  background:#020617;
+  border:1px solid rgba(56,189,248,.35);
+  color:#64748b;
+  font-size:16px;
+  font-weight:900;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:.3s;
+}
+
+.progress-step span{
+  font-size:11px;
+  font-weight:500;
+  margin-top:3px;
+}
+
+.progress-line{
+  width:36px;
+  height:3px;
+  background:rgba(56,189,248,.25);
+}
+
+/* ACTIVE */
+.progress-step.active{
+  background:linear-gradient(135deg,#38bdf8,#22d3ee);
+  color:#020617;
+  box-shadow:0 0 25px rgba(56,189,248,.8);
+  border:none;
+}
+
+/* DONE */
+.progress-step.done{
+  color:#38bdf8;
+  border-color:#38bdf8;
+}
     body{
       margin:0;
       font-family:Inter,Arial,sans-serif;
@@ -156,6 +207,16 @@
 </head>
 
 <body>
+  <!-- PROGRESS FUNNEL -->
+<div class="progress-wrap">
+  <div class="progress-step" data-page="hook.html">1<br><span>Hook</span></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" data-page="problem.html">2<br><span>Problem</span></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" data-page="solution.html">3<br><span>Solution</span></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" data-page="cta.html">4<br><span>CTA</span></div>
+</div>
   <div class="container">
 
     <!-- HEADER -->
@@ -196,5 +257,26 @@
     </footer>
 
   </div>
+  <script>
+  const steps = document.querySelectorAll('.progress-step');
+  const currentPage = location.pathname.split('/').pop();
+
+  let activeIndex = 0;
+
+  steps.forEach((step, index) => {
+    if(step.dataset.page === currentPage){
+      activeIndex = index;
+    }
+  });
+
+  steps.forEach((step, index) => {
+    if(index < activeIndex){
+      step.classList.add('done');
+    }
+    if(index === activeIndex){
+      step.classList.add('active');
+    }
+  });
+  </script>
 </body>
 </html>
