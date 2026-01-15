@@ -205,27 +205,6 @@
     }
   </style>
 </head>
-<script>
-  const steps = document.querySelectorAll('.progress-step');
-  const currentPage = location.pathname.split('/').pop();
-
-  let activeIndex = 0;
-
-  steps.forEach((step, index) => {
-    if(step.dataset.page === currentPage){
-      activeIndex = index;
-    }
-  });
-
-  steps.forEach((step, index) => {
-    if(index < activeIndex){
-      step.classList.add('done');
-    }
-    if(index === activeIndex){
-      step.classList.add('active');
-    }
-  });
-                </script>
 <body>
   <!-- PROGRESS FUNNEL -->
 <div class="progress-wrap">
@@ -277,5 +256,26 @@
     </footer>
 
   </div>
+  <script>
+  const steps = document.querySelectorAll('.progress-step');
+  const currentPage = location.pathname.split('/').pop();
+
+  let activeIndex = 0;
+
+  steps.forEach((step, index) => {
+    if(step.dataset.page === currentPage){
+      activeIndex = index;
+    }
+  });
+
+  steps.forEach((step, index) => {
+    if(index < activeIndex){
+      step.classList.add('done');
+    }
+    if(index === activeIndex){
+      step.classList.add('active');
+    }
+  });
+  </script>
 </body>
 </html>
