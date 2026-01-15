@@ -4,9 +4,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AffiliGen AI</title>  <style>
     body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
-    .container{max-width:820px;margin:auto;padding:24px}
-    .hero{text-align:center;margin-bottom:36px}
-    .hero h1{font-size:36px;color:#38bdf8}
+    .container{max-width:900px;margin:auto;padding:24px}
+    .hero{text-align:center;margin-bottom:40px}
+    .hero h1{font-size:38px;color:#38bdf8}
     .hero p{opacity:.85}
     .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
     label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
@@ -52,8 +52,8 @@
   <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt</h3>
   <div id="videoOut" class="output">—</div>
   <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
-    <button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
-    <button class="copyBtn" onclick="exportPrompt('md')">⬇️ Download Prompt (.md)</button>
+  <button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
+  <button class="copyBtn" onclick="exportPrompt('md')">⬇️ Download Prompt (.md)</button>
 </div><footer>© 2026 AffiliGen AI — Build with GitHub + Vercel</footer>
 </div><script>
 function previewImages(input, target){
@@ -68,10 +68,27 @@ function previewImages(input, target){
 produkImg.onchange=()=>previewImages(produkImg,'produkPreview');
 modelImg.onchange=()=>previewImages(modelImg,'modelPreview');
 
-function copyText(id){navigator.clipboard.writeText(document.getElementById(id).innerText);alert('Prompt berhasil disalin ✅')}
+function copyText(id){
+  navigator.clipboard.writeText(document.getElementById(id).innerText);
+  alert('Prompt berhasil disalin ✅');
+}
 
 function generate(){
-  const focusMap={hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Gue kira ini HOAX… ternyata hasilnya gila 😳','Stop scroll! Ini alasan kenapa banyak orang nyesel telat tau ini','Jujur, ini bikin hidup gue lebih gampang…']},problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Masalahnya, kebanyakan orang ngalamin ini tiap hari…','Capek nggak sih udah coba banyak cara tapi gagal terus?','Ini yang bikin orang frustrasi tapi jarang dibahas…']},solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Sampai akhirnya gue nemuin solusi ini…','Cuma pakai ini, hasilnya langsung kerasa','Ini cara paling simpel yang pernah gue coba']},cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link ada di keranjang, jangan kehabisan!','Serius, cobain sekarang sebelum nyesel','Klik sekarang, gue pakai ini juga kok']}};
+  const focusMap={
+    hook:{t:'HOOK – STOP SCROLLING',v:'Extreme contrast, shocking first frame',copy:['Stop scroll! Ini alasannya…','Gue kira ini HOAX 😳','Ini bikin hidup gue lebih gampang…']},
+    problem:{t:'PROBLEM – PAIN POINT',v:'Raw emotion, relatable struggle',copy:['Capek coba banyak cara tapi gagal?','Masalah ini sering diremehin…','Ini yang bikin orang frustrasi…']},
+    solution:{t:'SOLUTION – TRANSFORMATION',v:'Clear demo, satisfying result',copy:['Akhirnya ketemu solusinya…','Cuma pakai ini hasilnya kerasa','Cara paling simpel yang pernah gue coba']},
+    cta:{t:'CTA – SELLING MOMENT',v:'Trust cue, urgency CTA',copy:['Link di keranjang sekarang!','Jangan kehabisan, serius','Klik sekarang sebelum nyesel']}
+  };
+
+  const aiStyle={
+    Grok:'Natural language, cinematic realism, descriptive',
+    Midjourney:'Ultra-detailed, cinematic lighting, sharp focus, 8k',
+    'Stable Diffusion':'Highly detailed, realistic texture, balanced composition',
+    Runway:'Smooth cinematic motion, realistic transition',
+    Pika:'Dynamic camera, fast social motion'
+  };
+
   const f=focusMap[fokus.value];
   const platformTone=platform.value==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
   const modeTone=mode.value==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
@@ -84,20 +101,21 @@ IMAGE PROMPT
 
 ${viralLine}Product: ${produk.value}
 Model: ${model.value}
-Use attached product & model images as visual reference (keep identity & shape consistent)
+Use attached images as reference (keep identity consistent)
 Visual Focus: ${f.v}
 Style: ${gaya.value}
 Mood: ${platformTone} | ${modeTone}
-AI Engine: ${ai.value}`;
+AI Style: ${aiStyle[ai.value]}`;
 
   videoOut.innerText = `${f.t}
 IMAGE → VIDEO PROMPT
 
-Use generated image + attached references
+Use generated image + references
 Motion: ${gerakan.value}
 Visual Focus: ${f.v}
 Style: ${gaya.value}
 Mood: ${platformTone} | ${modeTone}
+AI Style: ${aiStyle[ai.value]}
 Format: Vertical 9:16
 Duration: 5–7s
 Goal: High CTR Affiliate Video`;
@@ -114,55 +132,6 @@ ${videoOut.innerText}`;
   link.href = URL.createObjectURL(blob);
   link.download = `AffiliGen_Prompt.${type}`;
   link.click();
-},
-  problem:{
-    t:'PROBLEM – PAIN POINT',
-    v:'Raw emotion, relatable struggle',
-    copy:[
-      'Masalahnya, kebanyakan orang ngalamin ini tiap hari…',
-      'Capek nggak sih udah coba banyak cara tapi gagal terus?',
-      'Ini yang bikin orang frustrasi tapi jarang dibahas…'
-    ]
-  },
-  solution:{
-    t:'SOLUTION – TRANSFORMATION',
-    v:'Clear demo, satisfying result',
-    copy:[
-      'Sampai akhirnya gue nemuin solusi ini…',
-      'Cuma pakai ini, hasilnya langsung kerasa',
-      'Ini cara paling simpel yang pernah gue coba'
-    ]
-  },
-  cta:{
-    t:'CTA – SELLING MOMENT',
-    v:'Trust cue, urgency CTA',
-    copy:[
-      'Link ada di keranjang, jangan kehabisan!',
-      'Serius, cobain sekarang sebelum nyesel',
-      'Klik sekarang, gue pakai ini juga kok'
-    ]
-  }
-};
-  const f=focusMap[fokus.value];
-  const platformTone=platform.value==='tiktok'?'Fast-paced TikTok affiliate style':'Trust-building Shopee affiliate style';
-  const modeTone=mode.value==='viral'?'EXTREME viral affiliate, emotional, curiosity gap':'Clean commercial style';
-
-  const viralLine = mode.value==='viral' ? `Suggested Viral Hook Line: "${f.copy[Math.floor(Math.random()*f.copy.length)]}"
-
-` : '';
-
-  imageOut.innerText = `${f.t}
-IMAGE PROMPT
-
-${viralLine}Product: ${produk.value}
-Model: ${model.value}
-Use attached product & model images as visual reference (keep identity & shape consistent)
-Visual Focus: ${f.v}
-Style: ${gaya.value}
-Mood: ${platformTone} | ${modeTone}
-AI Engine: ${ai.value}`;
-
-  videoOut.innerText=`${f.t}\nIMAGE → VIDEO PROMPT\n\nUse generated image + attached references\nMotion: ${gerakan.value}\nVisual Focus: ${f.v}\nStyle: ${gaya.value}\nMood: ${platformTone} | ${modeTone}\nFormat: Vertical 9:16\nDuration: 5–7s\nGoal: High CTR Affiliate Video`;
 }
 </script></body>
-</html>
+  </html>
