@@ -21,10 +21,18 @@
   </style></head>
 <body>
 <div class="container"><section class="hero">
-  <h1>AffiliGen AI 🇮🇩</h1>
+  <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin-bottom:10px">
+    <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#38bdf8,#22d3ee);display:flex;align-items:center;justify-content:center;color:#020617;font-weight:bold">AG</div>
+    <h1 style="margin:0">AffiliGen AI 🇮🇩</h1>
+  </div>
   <p><strong>Affiliate Content Engine</strong><br>
   Generate high-converting <b>Image + Video AI Prompts</b><br>
   Built for TikTok & Shopee Affiliates</p>
+  <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <span style="padding:6px 12px;border-radius:999px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.35);font-size:12px">⚡ Funnel-based Prompt</span>
+    <span style="padding:6px 12px;border-radius:999px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.35);font-size:12px">🎬 Image → Video Ready</span>
+    <span style="padding:6px 12px;border-radius:999px;background:rgba(56,189,248,.15);border:1px solid rgba(56,189,248,.35);font-size:12px">🔥 Viral Affiliate Mode</span>
+  </div>
 </section><div class="card">
   <label>1️⃣ Referensi Produk</label>
   <textarea id="produk" placeholder="Contoh: Skincare acne brand lokal"></textarea>
@@ -54,7 +62,11 @@
   <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>
   <button class="copyBtn" onclick="exportPrompt()">⬇️ Download Prompt (.txt)</button>
   <button class="copyBtn" onclick="exportPrompt('md')">⬇️ Download Prompt (.md)</button>
-</div><footer>© 2026 AffiliGen AI — Build with GitHub + Vercel</footer>
+</div><footer>
+  <div style="margin-bottom:6px;font-weight:bold">AffiliGen AI</div>
+  <div>AI Prompt System for Affiliate Creators</div>
+  <div style="margin-top:6px">© 2026 — Built with GitHub + Vercel</div>
+</footer>
 </div><script>
 function previewImages(input, target){
   const preview = document.getElementById(target);
@@ -134,4 +146,4 @@ ${videoOut.innerText}`;
   link.click();
 }
 </script></body>
-</html>
+    </html>
