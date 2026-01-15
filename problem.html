@@ -1,91 +1,200 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Problem Tool – AffiliGen AI</title>  <style>
-    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#020617,#0f172a);color:#e5e7eb}
-    .container{max-width:860px;margin:auto;padding:24px}
-    .hero{text-align:center;margin-bottom:36px}
-    .hero h1{font-size:36px;color:#38bdf8;margin-bottom:6px}
-    .hero p{opacity:.85;font-size:15px}
-    .card{background:rgba(2,6,23,.95);border:1px solid rgba(56,189,248,.15);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 15px 40px rgba(0,0,0,.45)}
-    label{display:block;margin-top:14px;font-weight:bold;font-size:14px}
-    textarea,input,select{width:100%;margin-top:6px;padding:12px;border-radius:12px;border:none;background:#020617;color:#e5e7eb;font-size:14px}
-    button{width:100%;margin-top:22px;padding:15px;border:none;border-radius:14px;background:#38bdf8;color:#020617;font-weight:bold;font-size:15px;cursor:pointer;transition:.25s}
-    button:hover{box-shadow:0 0 28px rgba(56,189,248,.6)}
-    .output{white-space:pre-wrap;font-size:13px;background:#020617;padding:16px;border-radius:14px;margin-top:10px;border:1px solid rgba(56,189,248,.15)}
-    .copyBtn{margin-top:10px;background:#020617;color:#38bdf8;border:1px solid rgba(56,189,248,.3)}
-    footer{text-align:center;opacity:.6;font-size:12px;margin-top:40px}
-  </style></head>
-<body>
-<div class="container"><section class="hero">
-  <h1>⚠️ Problem Tool</h1>
-  <p>Menggali <b>masalah & pain point</b> audience secara emosional.<br>
-  Bikin penonton merasa: "Ini gue banget".</p>
-</section><div class="card">
-  <label>1️⃣ Produk / Niche</label>
-  <textarea id="produk" placeholder="Contoh: Skincare acne, alat dapur"></textarea><label>2️⃣ Target Audience</label>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Problem Tool — AffiliGen AI</title>
 
-  <textarea id="audience" placeholder="Pria/Wanita 20–35, sibuk, sering gagal"></textarea><label>3️⃣ Masalah Utama</label>
+  <style>
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter,Arial,sans-serif;
+      background:radial-gradient(circle at top,#0f172a,#020617 65%);
+      color:#e5e7eb;
+    }
 
-  <textarea id="masalah" placeholder="Contoh: jerawat tidak hilang, hasil tidak konsisten"></textarea><label>4️⃣ Tingkat Emosi</label> <select id="emosi"> <option value="ringan">Ringan (kesal)</option> <option value="frustrasi">Frustrasi</option> <option value="putus_asa">Putus asa</option> <option value="takut">Takut salah / rugi</option> </select>
+    a{text-decoration:none}
 
-<label>5️⃣ Gaya Penyampaian</label> <select id="gaya"> <option value="relatable">Relatable / Sehari-hari</option> <option value="confession">Confession (jujur)</option> <option value="dramatic">Dramatic</option> <option value="silent">Silent / Visual saja</option> </select>
+    .container{
+      max-width:900px;
+      margin:auto;
+      padding:40px 18px 80px;
+    }
 
-<button onclick="generateProblem()">🔥 Generate Problem</button>
+    /* HEADER */
+    .header{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:30px;
+    }
 
-</div><div class="card">
-  <h3>🖼️ Image Prompt (Problem Frame)</h3>
-  <div id="imageOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('imageOut')">📋 Copy Image Prompt</button>  <h3 style="margin-top:26px">🎬 Image → Video Prompt (Problem Scene)</h3>
-  <div id="videoOut" class="output">—</div>
-  <button class="copyBtn" onclick="copyText('videoOut')">📋 Copy Video Prompt</button>  <h3 style="margin-top:26px">🧠 Emotional Angle</h3>
-  <div id="angleOut" class="output">—</div>
-</div><footer>
-  <div><b>AffiliGen AI – Problem Tool</b></div>
-  <div>Build for TikTok & Shopee Affiliate</div>
-  <div style="margin-top:6px">© 2026</div>
-</footer></div><script>
-function copyText(id){
-  navigator.clipboard.writeText(document.getElementById(id).innerText);
-  alert('Disalin ✅');
-}
-
-function generateProblem(){
-  const produk = produk.value;
-  const audience = audience.value;
-  const masalah = masalah.value;
-  const emosi = emosi.value;
-  const gaya = gaya.value;
-
-  const emosiMap={
-    ringan:'Ekspresi kesal ringan, napas panjang, micro expression',
-    frustrasi:'Wajah lelah, gesture menyerah, bahu turun',
-    putus_asa:'Tatapan kosong, slow motion, gelap',
-    takut:'Gerak ragu, close-up tangan/wajah'
-  };
-
-  imageOut.innerText = `PROBLEM IMAGE PROMPT\n\nProduct/Niche: ${produk}\nTarget Audience: ${audience}\nProblem Focus: ${masalah}\nEmotion Level: ${emosi}\nVisual Expression: ${emosiMap[emosi]}\nLighting: Natural / moody\nComposition: Close-up, imperfect, raw\nGoal: Make viewer feel "this is my problem"`;
-
-  videoOut.innerText = `PROBLEM VIDEO PROMPT (Image → Video)\n\nUse problem image as base frame\nMotion: Slow, heavy, realistic\nDuration: 3–4 seconds\nEmotion Build: ${emosi}\nDelivery Style: ${gaya}\nFormat: Vertical 9:16\nGoal: Build emotional tension before solution`;
-
-  angleOut.innerText = `EMOTIONAL ANGLE\n\nMasalah "${masalah}" dialami oleh ${audience}.\nFokuskan rasa tidak nyaman, bukan solusi.\nBiarkan penonton merasa: \"Gue juga pernah di posisi ini\".`;
-}
-</script></body>
-</html>
-<div style="margin-top:40px;text-align:center">
-    <a href="cta.html" style="
-      display:inline-block;
-      padding:14px 28px;
+    .logo{
+      width:48px;
+      height:48px;
       border-radius:14px;
-      background:#facc15;
-      color:#422006;
-      font-weight:700;
-      text-decoration:none;
-    ">
-      ➡️ Lanjut ke CTA
-    </a>
-  </div>
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 0 30px rgba(56,189,248,.6);
+    }
 
+    h1{
+      margin:0;
+      font-size:32px;
+      color:#38bdf8;
+    }
+
+    .subtitle{
+      opacity:.85;
+      margin-top:6px;
+    }
+
+    /* CARD */
+    .card{
+      background:rgba(2,6,23,.92);
+      border:1px solid rgba(56,189,248,.18);
+      border-radius:22px;
+      padding:28px;
+      margin-top:36px;
+      box-shadow:0 18px 45px rgba(0,0,0,.45);
+    }
+
+    .card h2{
+      margin-top:0;
+      color:#7dd3fc;
+      font-size:22px;
+    }
+
+    label{
+      display:block;
+      margin-top:22px;
+      margin-bottom:6px;
+      font-size:14px;
+      font-weight:600;
+      opacity:.9;
+    }
+
+    textarea{
+      width:100%;
+      min-height:90px;
+      resize:vertical;
+      padding:14px;
+      border-radius:14px;
+      border:1px solid rgba(56,189,248,.25);
+      background:#020617;
+      color:#e5e7eb;
+      font-size:14px;
+    }
+
+    textarea:focus{
+      outline:none;
+      border-color:#38bdf8;
+      box-shadow:0 0 18px rgba(56,189,248,.35);
+    }
+
+    .hint{
+      font-size:13px;
+      opacity:.65;
+      margin-top:6px;
+    }
+
+    /* CTA */
+    .cta-wrap{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      margin-top:36px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      flex:1;
+      padding:16px 22px;
+      font-size:15px;
+      font-weight:800;
+      border-radius:18px;
+      border:none;
+      cursor:pointer;
+      text-align:center;
+      transition:.25s ease;
+    }
+
+    .btn-back{
+      background:#020617;
+      color:#38bdf8;
+      border:1px solid rgba(56,189,248,.35);
+    }
+
+    .btn-back:hover{
+      box-shadow:0 0 24px rgba(56,189,248,.4);
+    }
+
+    .btn-next{
+      background:linear-gradient(135deg,#38bdf8,#22d3ee);
+      color:#020617;
+      box-shadow:0 0 36px rgba(56,189,248,.55);
+    }
+
+    .btn-next:hover{
+      transform:translateY(-2px);
+      box-shadow:0 0 60px rgba(56,189,248,.85);
+    }
+
+    /* FOOTER */
+    footer{
+      margin-top:70px;
+      text-align:center;
+      font-size:13px;
+      opacity:.6;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="logo">AG</div>
+      <div>
+        <h1>Problem Tool</h1>
+        <div class="subtitle">Step 2 — Bangun rasa “ini gue banget”</div>
+      </div>
+    </div>
+
+    <!-- MAIN CARD -->
+    <div class="card">
+      <h2>⚠️ Definisikan Masalah & Pain Point</h2>
+
+      <label>Masalah Utama Audience</label>
+      <textarea placeholder="Contoh: Udah coba banyak produk tapi jerawat nggak hilang-hilang"></textarea>
+      <div class="hint">Satu masalah spesifik, jangan umum.</div>
+
+      <label>Dampak Emosional</label>
+      <textarea placeholder="Frustrasi, minder, capek buang uang, takut salah beli lagi"></textarea>
+      <div class="hint">Masuk ke perasaan, bukan logika dulu.</div>
+
+      <label>Kesalahan Umum / Miskonsepsi</label>
+      <textarea placeholder="Fokus ke harga murah, ikut-ikutan review, asal beli karena viral"></textarea>
+      <div class="hint">Ini bikin konten terasa jujur & manusiawi.</div>
+
+      <!-- CTA -->
+      <div class="cta-wrap">
+        <a href="hook.html" class="btn btn-back">⬅ Kembali ke Hook</a>
+        <a href="solution.html" class="btn btn-next">Lanjut ke Solution ➜</a>
+      </div>
+    </div>
+
+    <footer>
+      <div><strong>AffiliGen AI</strong></div>
+      <div>Hook → Problem → Solution → CTA</div>
+    </footer>
+
+  </div>
 </body>
 </html>
